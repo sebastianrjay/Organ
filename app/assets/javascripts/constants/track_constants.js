@@ -1,0 +1,4 @@
+window.TrackConstants = {
+  TRACK_ADDED: 'TRACK_ADDED',
+  TRACK_DELETED: 'TRACK_DELETED'
+}
