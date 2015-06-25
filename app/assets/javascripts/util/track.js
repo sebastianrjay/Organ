@@ -29,7 +29,8 @@
     },
 
     playOrStopNotes: function() {
-      if((Date.now() - this.playStartTime) >= this.player[0].time) {
+      if(this.player[0] &&
+          (Date.now() - this.playStartTime) >= this.player[0].time) {
         this.playingNotes.forEach(function(note) {
           note.stop();
         });
