@@ -36,7 +36,9 @@ var Recorder = React.createClass({
   },
 
   _onTrackStoreChange: function() {
-    this.setState({ playing: this.track.playing });
+    if (this.track) {
+      this.setState({ playing: this.track.playing });
+    }
   },
 
   render: function() {
