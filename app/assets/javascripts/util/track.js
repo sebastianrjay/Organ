@@ -55,7 +55,7 @@
     stopPlayback: function() {
       clearInterval(this.interval);
 
-      if (this.player[0].notes) {
+      if (this.player[0] && this.player[0].notes) {
         this.player[0].notes.forEach(function(note) {
           note.stop();
         });
@@ -64,7 +64,7 @@
       this.playingNotes.forEach(function(note) {
         note.stop();
       });
-      this.playingNotes, this.player = [];
+      this.playingNotes = this.player = [];
       this.playStartTime = null;
       this.playing = false;
       TrackActions.togglePlay(this);
