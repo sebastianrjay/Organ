@@ -11,6 +11,9 @@ var Recorder = React.createClass({
   },
 
   deleteTrack: function() {
+    if (this.track.playing) {
+      this.track.stopPlayback();
+    }
     this.track = null;
     this.setState({ recording: false, doneRecording: false, formInput: "" });
   },
