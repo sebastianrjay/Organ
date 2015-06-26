@@ -12,5 +12,12 @@ window.TrackActions = {
       actionType: TrackConstants.TRACK_DELETED,
       track: track
     })
+  },
+
+  togglePlay: function(track) {
+    AppDispatcher.dispatch({
+      actionType: TrackConstants.TRACK_PLAYBACK_TOGGLED,
+      track: track
+    })
   }
 }

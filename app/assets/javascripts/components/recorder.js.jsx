@@ -1,8 +1,13 @@
 var Recorder = React.createClass({
 
+  cancelSaveTrack: function() {
+    this.setState({ recording: false, doneRecording: false });
+  },
+
   componentDidMount: function() {
-    this.tracks = null;
+    this.track = null;
     KeyStore.addChangeListener(this._onKeyStoreChange);
+    TrackStore.addChangeListener(this._onTrackStoreChange);
   },
 
   getInitialState: function() {
@@ -17,16 +22,21 @@ var Recorder = React.createClass({
   },
 
   _onKeyStoreChange: function() {
-    if (this.tracks && this.tracks[this.tracks.length - 1].recording) {
-      this.tracks[this.tracks.length - 1].addNotes(KeyStore.pressedKeys());
+    if (this.track && this.track.recording) {
+      this.track.addNotes(KeyStore.pressedKeys());
     }
   },
 
+  _onTrackStoreChange: function() {
+    this.setState({ playing: this.track.playing });
+  },
+
   render: function() {
-    var recordClass, playClass, input, saveButton;
+    var recordClass, playClass = "", playText = "Stop", input, cancelButton,
+        deleteButton, saveButton;
 
     this.state.recording ? recordClass = " recording" : recordClass = "";
-    this.state.playing ? playClass = " playing" : playClass = "";
+    this.state.playing ? playClass = " playing" : playText = "Play";
 
     if(this.state.doneRecording) {
       document.removeEventListener('keydown', KeyActions.pressKey);
@@ -34,12 +44,15 @@ var Recorder = React.createClass({
       input = <input type="text" className='new-track-input'
         value={ this.state.formInput } onChange={ this.handleTextInput } />
       saveButton = <button className='save-button'
-        onClick={ this.save }>Save</button>;
+        onClick={ this.saveTrack }>Save</button>;
+      deleteButton = <button className='delete-button'
+        onClick={ this.deleteTrack }>Delete</button>
+      cancelButton = <button className='cancel-button'
+        onClick={ this.cancelSaveTrack }>Cancel</button>
     } else {
       document.addEventListener('keydown', KeyActions.pressKey);
       document.addEventListener('keyup', KeyActions.releaseKey);
-      input = "";
-      saveButton = "";
+      input = "", saveButton = "", deleteButton = "", cancelButton = "";
     }
 
     return (
@@ -47,39 +60,43 @@ var Recorder = React.createClass({
         <button className={ 'record-button' + recordClass }
         onClick={ this.toggleRecord }>Record</button>
         <button className={ 'play-button' + playClass }
-        onClick={ this.togglePlay }>Play</button>
-        { this.state.doneRecording ? saveButton : "" }
+        onClick={ this.togglePlay }>{ playText }</button>
         { input }
+        { saveButton }
+        { cancelButton }
+        { deleteButton }
       </div>
     )
   },
 
-  save: function() {
-    var newTrack = this.tracks[this.tracks.length - 1];
-    newTrack.name = this.state.formInput;
-    TrackActions.addTrack(newTrack);
-    ApiActions.saveTrack(newTrack);
+  saveTrack: function() {
+    this.track.name = this.state.formInput;
+    TrackActions.addTrack(this.track);
+    ApiActions.saveTrack(this.track);
+    this.track = null;
     this.setState({ doneRecording: false, formInput: "" });
   },
 
   togglePlay: function() {
-    if (this.tracks && this.tracks[this.tracks.length - 1].playing) {
-      this.tracks[this.tracks.length - 1].stopPlayback();
+    if (this.track && this.track.playing) {
+      this.track.stopPlayback();
       this.setState({ playing: false });
-    } else if (this.tracks) {
-      this.tracks[this.tracks.length - 1].play();
+    } else if (this.track) {
+      this.track.play();
       this.setState({ playing: true });
     }
   },
 
   toggleRecord: function() {
-    if (!this.tracks || !this.tracks[this.tracks.length - 1].recording){
-      this.tracks = this.tracks || [];
-      this.tracks.push(new Track());
-      this.tracks[this.tracks.length - 1].record();
+    if (!this.track){
+      this.track = new Track();
+      this.track.record();
+      this.setState({ recording: true, doneRecording: false });
+    } else if (!this.track.recording){
+      this.track.record();
       this.setState({ recording: true, doneRecording: false });
     } else {
-      this.tracks[this.tracks.length - 1].stopRecording();
+      this.track.stopRecording();
       this.setState({ recording: false, doneRecording: true });
     }
   }

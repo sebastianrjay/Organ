@@ -33,6 +33,8 @@
       } else if (payload.actionType === TrackConstants.TRACK_DELETED) {
         deleteTrack(payload.track);
         TrackStore.emit(CHANGE_EVENT);
+      } else if (payload.actionType === TrackConstants.TRACK_PLAYBACK_TOGGLED) {
+        TrackStore.emit(CHANGE_EVENT);
       }
     })
   });
