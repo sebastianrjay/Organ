@@ -10,6 +10,11 @@ var Recorder = React.createClass({
     TrackStore.addChangeListener(this._onTrackStoreChange);
   },
 
+  deleteTrack: function() {
+    this.track = null;
+    this.setState({ recording: false, doneRecording: false, formInput: "" });
+  },
+
   getInitialState: function() {
     return { recording: false, playing: false, doneRecording: false,
       formInput: "" };
