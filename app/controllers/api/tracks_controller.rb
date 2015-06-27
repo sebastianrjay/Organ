@@ -6,12 +6,7 @@ class Api::TracksController < ApplicationController
 
   def create
     if params[:track][:delete]
-      @track_matches = Track.where("name = ?", params[:track][:name])
-      if @track_mathes.length != 1
-        @track_matches = Track.where("roll = ?", params[:track][:roll])
-      end
-
-      @track_matches[0].delete
+      destroy
     else
       @track = Track.new(track_params)
       @track.save
@@ -20,6 +15,13 @@ class Api::TracksController < ApplicationController
   end
 
   def destroy
+    @track_matches = Track.where("name = ?", params[:track][:name])
+    if @track_matches.length != 1
+      @track_matches = Track.where("roll = ?", params[:track][:roll])
+    end
+
+    @track_matches[0].delete if @track_matches.length == 1
+    render json: {}
   end
 
   private

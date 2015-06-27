@@ -8,7 +8,6 @@ window.TrackActions = {
   },
 
   deleteTrack: function(track) {
-    track['delete'] = true;
     AppDispatcher.dispatch({
       actionType: TrackConstants.TRACK_DELETED,
       track: track
