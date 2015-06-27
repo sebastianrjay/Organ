@@ -42,11 +42,19 @@ var Recorder = React.createClass({
   },
 
   render: function() {
-    var recordClass, playClass = "", playText = "Stop", input, cancelButton,
-        deleteButton, saveButton;
+    var recordClass = "", playClass = "", playText = "Stop", input, cancelButton,
+        deleteButton = "", playButton = "", saveButton,
+        recordText = "Stop Recording";
 
-    this.state.recording ? recordClass = " recording" : recordClass = "";
+    this.state.recording ? recordClass = " recording" : recordText = "Record";
     this.state.playing ? playClass = " playing" : playText = "Play";
+
+    if (this.track) {
+      deleteButton = <button className='delete-button'
+        onClick={ this.deleteTrack }>Delete</button>
+      playButton = <button className={ 'play-button' + playClass }
+      onClick={ this.togglePlay }>{ playText }</button>
+    }
 
     if(this.state.doneRecording) {
       document.removeEventListener('keydown', KeyActions.pressKey);
@@ -55,22 +63,19 @@ var Recorder = React.createClass({
         value={ this.state.formInput } onChange={ this.handleTextInput } />
       saveButton = <button className='save-button'
         onClick={ this.saveTrack }>Save</button>;
-      deleteButton = <button className='delete-button'
-        onClick={ this.deleteTrack }>Delete</button>
       cancelButton = <button className='cancel-button'
         onClick={ this.cancelSaveTrack }>Cancel</button>
     } else {
       document.addEventListener('keydown', KeyActions.pressKey);
       document.addEventListener('keyup', KeyActions.releaseKey);
-      input = "", saveButton = "", deleteButton = "", cancelButton = "";
+      input = "", saveButton = "", cancelButton = "";
     }
 
     return (
       <div className='recorder'>
         <button className={ 'record-button' + recordClass }
-        onClick={ this.toggleRecord }>Record</button>
-        <button className={ 'play-button' + playClass }
-        onClick={ this.togglePlay }>{ playText }</button>
+        onClick={ this.toggleRecord }>{ recordText }</button>
+        { playButton }
         { input }
         { saveButton }
         { cancelButton }
