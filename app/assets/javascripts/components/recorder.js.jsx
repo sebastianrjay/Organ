@@ -42,8 +42,8 @@ var Recorder = React.createClass({
   },
 
   render: function() {
-    var recordClass = "", playClass = "", playText = "Stop", input, cancelButton,
-        deleteButton = "", playButton = "", saveButton,
+    var recordClass = "", playClass = "", playText = "Stop", input, saveButton,
+        deleteButton = "", playButton = "", cancelButton,
         recordText = "Stop Recording";
 
     this.state.recording ? recordClass = " recording" : recordText = "Record";
