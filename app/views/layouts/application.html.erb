@@ -8,7 +8,28 @@
 </head>
 <body>
 
-<%= yield %>
+  <div class="rails-errors">
+    <%= render "partials/errors" %>
+  </div>
 
+  <%= yield %>
+
+  <script type="text/javascript" charset="utf-8">
+    <% if logged_in? %>
+      $(function () {
+        window.User = {
+          logged_in: true,
+          username: "<%= current_user.username %>"
+        };
+      })
+    <% else %>
+      $(function () {
+        window.User = {
+          loggedIn: false,
+          username: ""
+        };
+      });
+    <% end %>
+  </script>
 </body>
 </html>

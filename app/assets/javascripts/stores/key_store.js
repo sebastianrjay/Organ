@@ -1,10 +1,6 @@
 ;(function(root){
   var _pressedKeys = {};
 
-  // var resetKeys = function (keys) {
-  //   _pressedKeys = keys;
-  // }
-
   var addKey = function(key) {
     _pressedKeys[key] = true;
   }
@@ -39,6 +35,8 @@
         deleteKey(payload.key);
         KeyStore.emit(CHANGE_EVENT);
       }
+
+      return true;
     })
   });
 

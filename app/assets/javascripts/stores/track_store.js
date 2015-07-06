@@ -36,6 +36,8 @@
       } else if (payload.actionType === TrackConstants.TRACK_PLAYBACK_TOGGLED) {
         TrackStore.emit(CHANGE_EVENT);
       }
+
+      return true;
     })
   });
 })(this);
