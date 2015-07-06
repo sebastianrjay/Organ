@@ -1,0 +1,30 @@
+<div class="log-in-background">
+	<div class="log-in">
+	<h1>Sign Up</h1>
+	<a href="../session/new"><h4>Already a member? Log In</h4></a>
+  <form method="post" action="<%= users_url %>" role="form">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <label for="user_name">
+	    <input type="text" name="user[username]"
+	      value="<%= @user.username if @user.username %>" id="user_name" placeholder="Name">
+	  </label>
+	  <label for="user_email">
+	    <input type="text" name="user[email]"
+	      value="<%= @user.email if @user.email %>" id="user_email" placeholder="Email">
+	  </label>
+	  <label for="user_password">
+	    <input type="password" name="user[password]" value="<%= @user.password if @user.password %>"
+        id="user_password" placeholder="Password">
+	  </label>
+    <br>
+	  <input type="submit" value="Sign Up">
+	</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var w = $(window).width(), h = $(window).height();
+	$('.log-in-background').css('width', w);
+	$('.log-in-background').css('height', h);
+	$('.log-in-background').css('padding-top', ((h / 2) - 175));
+</script>
