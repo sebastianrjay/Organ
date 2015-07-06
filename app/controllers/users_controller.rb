@@ -12,7 +12,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def new; end
+  def new
+    @user = User.new
+    render :new
+  end
 
   private
 
