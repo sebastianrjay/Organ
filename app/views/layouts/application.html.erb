@@ -16,19 +16,19 @@
 
   <script type="text/javascript" charset="utf-8">
     <% if logged_in? %>
-      $(function () {
+      ;(function () {
         window.User = {
-          logged_in: true,
+          loggedIn: true,
           username: "<%= current_user.username %>"
         };
-      })
+      })();
     <% else %>
-      $(function () {
+      ;(function () {
         window.User = {
           loggedIn: false,
           username: ""
         };
-      });
+      })();
     <% end %>
   </script>
 </body>

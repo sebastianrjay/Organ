@@ -59,7 +59,7 @@ var Recorder = React.createClass({
     if(this.state.doneRecording) {
       document.removeEventListener('keydown', KeyActions.pressKey);
       document.removeEventListener('keyup', KeyActions.releaseKey);
-      input = <input type="text" className='new-track-input'
+      input = <input type="text" className='new-track-input' placeholder="Song Title"
         value={ this.state.formInput } onChange={ this.handleTextInput } />
       saveButton = <button className='save-button'
         onClick={ this.saveTrack }>Save</button>;

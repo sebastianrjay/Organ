@@ -15,6 +15,8 @@ gem 'react-rails', '~> 1.0'
 gem 'flux-rails-assets'
 gem 'bcrypt'
 
+gem "twitter-bootstrap-rails"
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

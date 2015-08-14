@@ -27,10 +27,11 @@ var Organ = React.createClass({
     noteNames.forEach(function(noteName, idx) {
       if (KeyColors[noteName] === 'black') {
         if (idx < 4) {
-          var leftPos = (52 * (idx + 1) / 2) - 12;
+          var leftPos = (52 * (idx + 1) / 2) - 15;
         } else {
-          var leftPos = (52 * (idx + 2) / 2) - 12;
+          var leftPos = (52 * (idx + 2) / 2) - 22.5;
         }
+
         keys.push(<Key key={ idx } noteName={ noteName }
         color={ KeyColors[noteName] } style={{ left : leftPos }} />);
       } else {

@@ -1,5 +1,5 @@
 class Api::TracksController < ApplicationController
-  
+
   def index
     @tracks = Track.all
     render json: @tracks
@@ -16,12 +16,16 @@ class Api::TracksController < ApplicationController
   end
 
   def destroy
-    @track_matches = Track.where("name = ?", params[:track][:name])
-    if @track_matches.length != 1
-      @track_matches = Track.where("roll = ?", params[:track][:roll])
+    @track = Track.includes(:composer).where("name = ? AND roll = ?",
+      params[:track][:name], params[:track][:roll])
+      .select {|track| track.composer == current_user}[0]
+
+    if @track
+      @track.delete
+    else
+      flash[:errors] = "You are not authorized to delete this track."
     end
 
-    @track_matches[0].delete if @track_matches.length == 1
     render json: {}
   end
 

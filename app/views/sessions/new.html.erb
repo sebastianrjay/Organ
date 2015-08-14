@@ -1,32 +1,31 @@
-<div class="log-in-background">
-	<div class="log-in">
-	<h1><b>Log In</b></h1>
-  <form method="post" action="<%= session_url %>" role="form">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <label for="session_name">
-      <input type="text" name="user[username]"
-        id="session_email" placeholder="Username">
-	  </label>
-	  <label for="session_password">
-	    <input type="password" name="user[password]" id="session_password"
-        placeholder="Password">
-	  </label>
-    <br>
-	  <b><input type="submit" value="Log In"></b>
-	</form>
-  <form method="post" action="<%= session_url %>" role="form">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<section class="row">
+	<div class="container">
+		<div class="col-md-4">
+		</div>
 
-    <input type="hidden" name="user[username]" value="Guest">
-    <input type="hidden" name="user[password]" value="guesstheguest">
-    <b><input type="submit" value="Guest Login"></b>
-  </form>
+		<div class="col-md-4">
+		  <form class"form-signin" method="post" action="<%= session_url %>" role="form">
+				<h1 class="form-signin-heading login-header">Log In</h1>
+				<h4 class="login-header">Not a member yet? <a href="../users/new">Sign Up</a></h4>
+		    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		    <label class="sr-only" for="session_name"></label>
+		    <input type="text" class="form-control" name="user[username]"
+		        placeholder="Username" required autofocus>
+			  <label class="sr-only" for="session_password"></label>
+			  <input type="password" name="user[password]"
+		        class="form-control" placeholder="Password" required autofocus>
+				<input type="submit" class="btn btn-lg btn-block btn-default" value="Log In">
+			</form>
+		  <form method="post" action="<%= session_url %>" role="form">
+		    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+		    <input type="hidden" name="user[username]" value="guest">
+		    <input type="hidden" name="user[password]" value="guesstheguest">
+		  	<input type="submit" class="btn btn-lg btn-block btn-primary" value="Guest Login">
+		  </form>
+		</div>
+
+		<div class="col-md-4">
+		</div>
 	</div>
-</div>
-
-<script type="text/javascript">
-	var w = $(window).width(), h = $(window).height();
-	$('.log-in-background').css('width', w);
-	$('.log-in-background').css('height', h);
-	$('.log-in-background').css('padding-top', ((h / 2) - 175));
-</script>
+</section>
