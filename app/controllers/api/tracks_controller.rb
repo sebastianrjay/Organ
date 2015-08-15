@@ -6,21 +6,22 @@ class Api::TracksController < ApplicationController
   end
 
   def create
-    if params[:track][:delete]
-      destroy
-    else
-      @track = Track.new(track_params)
-      @track.save
+    @track = Track.new(track_params)
+    @track.user_id = current_user.id
+
+    if @track.save
+      flash[:errors] = []
       render json: @track
+    else
+      flash[:errors] = @track.errors.full_messages
+      render json: @track, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @track = Track.includes(:composer).where("name = ? AND roll = ?",
-      params[:track][:name], params[:track][:roll])
-      .select {|track| track.composer == current_user}[0]
+    @track = Track.includes(:composer).find_by_id(params[:id])
 
-    if @track
+    if @track && @track.composer == current_user
       @track.delete
     else
       flash[:errors] = "You are not authorized to delete this track."

@@ -1,11 +1,8 @@
 window.ApiActions = {
   deleteTrack: function(track) {
-    data = { name: track.name , delete: true, roll: JSON.stringify(track.roll) };
-
     $.ajax({
-      url: 'api/tracks',
-      method: 'POST',
-      data: { track: data }
+      url: 'api/tracks/' + track.id,
+      method: 'DELETE'
     });
   },
 
@@ -15,7 +12,8 @@ window.ApiActions = {
     $.ajax({
       url: 'api/tracks',
       method: 'POST',
-      data: { track: data }
+      data: { track: data },
+      success: TrackActions.updateTrack
     });
   }
 }

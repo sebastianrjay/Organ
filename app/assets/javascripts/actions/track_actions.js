@@ -14,6 +14,13 @@ window.TrackActions = {
     })
   },
 
+  updateTrack: function(newData) {
+    AppDispatcher.dispatch({
+      actionType: TrackConstants.TRACK_UPDATED,
+      newData: newData
+    })
+  },
+
   togglePlay: function(track) {
     AppDispatcher.dispatch({
       actionType: TrackConstants.TRACK_PLAYBACK_TOGGLED,
