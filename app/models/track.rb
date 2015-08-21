@@ -5,8 +5,4 @@ class Track < ActiveRecord::Base
     class_name: 'User',
     foreign_key: :user_id
   }
-
-  def as_json(options = {})
-    super(only: [:id, :name])
-  end
 end

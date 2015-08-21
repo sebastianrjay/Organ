@@ -1,7 +1,8 @@
 class Api::TracksController < ApplicationController
 
   def index
-    @tracks = Track.all
+    sample_len = [Track.count, 3].min
+    @tracks = Track.take(sample_len)
     render json: @tracks
   end
 
@@ -11,7 +12,7 @@ class Api::TracksController < ApplicationController
 
     if @track.save
       flash[:errors] = []
-      render json: @track
+      render json: { id: @track.id, name: @track.name }
     else
       flash[:errors] = @track.errors.full_messages
       render json: @track, status: :unprocessable_entity
@@ -33,6 +34,6 @@ class Api::TracksController < ApplicationController
   private
 
     def track_params
-      params.require(:track).permit(:name, :roll, :delete)
+      params.require(:track).permit(:name, :roll)
     end
 end

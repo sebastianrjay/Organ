@@ -21,29 +21,27 @@
     },
 
     play: function() {
-      this.playing = true;
-      this.playStartTime = Date.now();
-      this.playingNotes = [];
-      this.player = this.roll.slice(0);
+      this.playing = true, this.playStartTime = Date.now(), this.rollIdx = 0;
       this.interval = setInterval(this.playOrStopNotes.bind(this), 1);
     },
 
     playOrStopNotes: function() {
-      if(this.player[0] &&
-          (Date.now() - this.playStartTime) >= this.player[0].time) {
-        this.playingNotes.forEach(function(note) {
-          note.stop();
-        });
+      if(this.roll[this.rollIdx] &&
+          (Date.now() - this.playStartTime) >= this.roll[this.rollIdx].time) {
+        if(this.rollIdx > 0) {
+          this.roll[this.rollIdx - 1].notes.forEach(function(note) {
+            note.stop();
+          });
+        }
 
-        this.playingNotes = [];
-        this.player[0].notes.forEach(function(note) {
+        this.roll[this.rollIdx].notes.forEach(function(note) {
           note.start();
-          this.playingNotes.push(note);
         }.bind(this));
-        this.player.shift();
+
+        this.rollIdx++;
       }
 
-      if(this.player.length === 0) {
+      if(this.rollIdx === this.roll.length) {
         this.stopPlayback();
       }
     },
@@ -55,18 +53,13 @@
     stopPlayback: function() {
       clearInterval(this.interval);
 
-      if (this.player[0] && this.player[0].notes) {
-        this.player[0].notes.forEach(function(note) {
+      if (this.roll[this.rollIdx - 1] && this.roll[this.rollIdx - 1].notes) {
+        this.roll[this.rollIdx - 1].notes.forEach(function(note) {
           note.stop();
         });
       }
 
-      this.playingNotes.forEach(function(note) {
-        note.stop();
-      });
-      this.playingNotes = this.player = [];
-      this.playStartTime = null;
-      this.playing = false;
+      this.playStartTime = null, this.rollIdx = 0, this.playing = false;
       TrackActions.togglePlay(this);
     },
 
