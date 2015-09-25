@@ -1,9 +1,15 @@
-<% if flash[:errors] %>
+<% if flash[:errors] && flash[:errors].is_a?(Array) && !flash[:errors].empty? %>
 <br>
-<ul>
-  <% flash[:errors].each do |error| %>
-  <li> <%= error %> </li>
-  <% end %>
-</ul>
+  <ul>
+    <% flash[:errors].each do |error| %>
+    <li> <%= error %> </li>
+    <% end %>
+  </ul>
+<br>
+<% elsif flash[:errors] %>
+<br>
+  <ul>
+    <li> <%= flash[:errors] %> </li>
+  </ul>
 <br>
 <% end %>

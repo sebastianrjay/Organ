@@ -22,8 +22,7 @@
     },
 
     pressedKeys: function(){
-      //return a shallow copy so consumer cannot mutate original
-      // return JSON.parse(JSON.stringify(_pressedKeys));
+      // return a shallow copy so consumer cannot mutate original
       return $.extend({}, _pressedKeys);
     },
 

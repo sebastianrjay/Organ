@@ -6,8 +6,16 @@ window.ApiActions = {
     });
   },
 
+  fetchTracks: function() {
+    $.ajax({
+      url: 'api/tracks',
+      method: 'GET',
+      success: TrackActions.parseTracksFromDB
+    });
+  },
+
   saveTrack: function(track) {
-    data = { name: track.name , roll: JSON.stringify(track.roll) };
+    data = { name: track.name, roll: JSON.stringify(track.frequenciesAndTimes) };
 
     $.ajax({
       url: 'api/tracks',

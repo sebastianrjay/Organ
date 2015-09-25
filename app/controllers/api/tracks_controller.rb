@@ -3,6 +3,9 @@ class Api::TracksController < ApplicationController
   def index
     sample_len = [Track.count, 3].min
     @tracks = Track.take(sample_len)
+    @tracks.map! do |track|
+      track.deletable = true if track.user_id == current_user.id
+    end
     render json: @tracks
   end
 
@@ -12,7 +15,7 @@ class Api::TracksController < ApplicationController
 
     if @track.save
       flash[:errors] = []
-      render json: { id: @track.id, name: @track.name }
+      render json: { id: @track.id, name: @track.name, deletable: true }
     else
       flash[:errors] = @track.errors.full_messages
       render json: @track, status: :unprocessable_entity

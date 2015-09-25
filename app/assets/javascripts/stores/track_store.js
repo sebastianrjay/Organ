@@ -10,10 +10,21 @@
     _tracks.splice(idx, 1);
   }
 
+  var parseAndAddTracksFromDB = function(data) {
+    data.forEach(function(trackData) {
+      addTrack(new Track({ name: trackData.name, id: trackData.id,
+        frequenciesAndTimes: trackData.roll, deletable: trackData.deletable
+      }));
+    });
+  }
+
   var updateTrack = function(newData) {
     var trackRequiringUpdate = _tracks.filter(function(track) {
       return newData.name === track.name;
     })[0] || {};
+    // Don't redundantly include newData.roll, which is identical to
+    // track.frequenciesAndTimes
+    delete newData.roll;
 
     $.extend(trackRequiringUpdate, newData);
   }
@@ -51,9 +62,15 @@
           updateTrack(payload.newData);
           TrackStore.emit(CHANGE_EVENT);
           break;
+        case TrackConstants.TRACKS_FETCHED:
+          parseAndAddTracksFromDB(payload.data);
+          TrackStore.emit(CHANGE_EVENT);
+          break;
       }
 
       return true;
     })
   });
 })(this);
+
+ApiActions.fetchTracks();

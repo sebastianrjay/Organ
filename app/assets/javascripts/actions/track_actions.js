@@ -14,6 +14,13 @@ window.TrackActions = {
     })
   },
 
+  parseTracksFromDB: function(data) {
+    AppDispatcher.dispatch({
+      actionType: TrackConstants.TRACKS_FETCHED,
+      data: data
+    })
+  },
+
   updateTrack: function(newData) {
     AppDispatcher.dispatch({
       actionType: TrackConstants.TRACK_UPDATED,
