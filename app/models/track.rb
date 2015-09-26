@@ -14,6 +14,6 @@ class Track < ActiveRecord::Base
   end
 
   def deletable
-    self.deletable || false
+    @deletable || false
   end
 end
