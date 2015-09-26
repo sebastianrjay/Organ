@@ -3,7 +3,7 @@ class Api::TracksController < ApplicationController
   def index
     sample_len = [Track.count, 3].min
     @tracks = Track.take(sample_len)
-    @tracks.map! do |track|
+    @tracks.each do |track|
       track.deletable = true if track.user_id == current_user.id
     end
     render json: @tracks
