@@ -1,19 +1,18 @@
 ;(function() {
 
+  // Saves only the frequency and start time of each note to the database, in
+  // order to avoid JSON parsing issues. When playing a track, replaces each
+  // frequency in this.frequenciesAndTimes with a note instantiated from that
+  // frequency, and stores the result in this.notesAndTimes
   window.Track = function(options) {
     if(options) {
-      this.id = options.id || null;
+      this.id = options.id || null, this.name = options.name || "untitled";
       this.id && options.deletable ? this.deletable = true : this.deletable = false;
-      this.name = options.name || "untitled";
       this.frequenciesAndTimes = options.frequenciesAndTimes || [];
     } else {
       this.id = null, this.deletable = false, this.name = "untitled",
       this.frequenciesAndTimes = [];
     }
-    // Save only the frequency and time of each note played to the database, in
-    // order to avoid JSON parsing issues. When playing a track, replace each
-    // frequency in this.frequenciesAndTimes with a note instantiated from that
-    // frequency, and store the result in this.notesAndTimes
     this.recording = false;
     this.recordStartTime = null;
     this.playing = false;
