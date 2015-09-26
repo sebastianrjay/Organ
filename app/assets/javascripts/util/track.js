@@ -1,18 +1,16 @@
 ;(function() {
-
-  // Saves only the frequency and start time of each note to the database, in
+  // Saves only the frequency and start time of each note to the database in
   // order to avoid JSON parsing issues. When playing a track, replaces each
   // frequency in this.frequenciesAndTimes with a note instantiated from that
   // frequency, and stores the result in this.notesAndTimes
+
   window.Track = function(options) {
-    if(options) {
-      this.id = options.id || null, this.name = options.name || "untitled";
-      this.id && options.deletable ? this.deletable = true : this.deletable = false;
-      this.frequenciesAndTimes = options.frequenciesAndTimes || [];
-    } else {
-      this.id = null, this.deletable = false, this.name = "untitled",
-      this.frequenciesAndTimes = [];
-    }
+    this.id = (options || {}).id || null;
+    if(this.id && (options || {}).deletable) {
+      this.deletable = true;
+    } else this.deletable = false;
+    this.name = (options || {}).name || "untitled";
+    this.frequenciesAndTimes = (options || {}).frequenciesAndTimes || [];
     this.recording = false;
     this.recordStartTime = null;
     this.playing = false;

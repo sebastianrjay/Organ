@@ -10,9 +10,12 @@ var TrackPlayer = React.createClass({
   },
 
   render: function() {
-    var playClass = "", text = "Play";
+    var playClass = "", text = "Play", deleteButton = "";
     if(this.props.track.playing) {
       playClass = " playing", text = "Stop";
+    }
+    if(this.props.track.deletable) {
+      deleteButton = <button onClick={ this.deleteTrack }>Delete</button>
     }
 
     return (
@@ -20,7 +23,7 @@ var TrackPlayer = React.createClass({
         <h5>{ this.props.track.name }</h5>
         <button className={ 'play-button' + playClass }
         onClick={ this.togglePlay }>{ text }</button>
-        <button onClick={ this.deleteTrack }>Delete</button>
+        { deleteButton }
       </div>
     )
   },

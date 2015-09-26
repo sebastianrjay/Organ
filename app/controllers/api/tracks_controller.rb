@@ -4,8 +4,9 @@ class Api::TracksController < ApplicationController
     sample_len = [Track.count, 3].min
     @tracks = Track.take(sample_len)
     @tracks.each do |track|
-      track.deletable = true if track.user_id == current_user.id
+      track.deletable = true if track.composer == current_user
     end
+    
     render json: @tracks
   end
 

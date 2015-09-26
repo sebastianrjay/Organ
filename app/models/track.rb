@@ -1,5 +1,5 @@
 class Track < ActiveRecord::Base
-  attr_writer :deletable
+  attr_accessor :deletable
   validates :name, presence: true, uniqueness: true
 
   belongs_to :composer, {
@@ -8,6 +8,8 @@ class Track < ActiveRecord::Base
   }
 
   def as_json(options = {})
-    super(except: [:created_at, :updated_at, :user_id])
+    super((options || {}).merge({methods: [:deletable], except: [:created_at,
+      :updated_at, :user_id]})
+    )
   end
 end
