@@ -36,7 +36,6 @@
         hash.notes = hash.frequencies.map(function(freq) {
           return new Note(freq);
         });
-        delete hash.frequencies;
 
         return hash;
       });

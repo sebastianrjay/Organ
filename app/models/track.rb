@@ -1,5 +1,5 @@
 class Track < ActiveRecord::Base
-  attr_accessor :deletable
+  attr_writer :deletable
   validates :name, presence: true, uniqueness: true
 
   belongs_to :composer, {
@@ -11,5 +11,9 @@ class Track < ActiveRecord::Base
     super((options || {}).merge({methods: [:deletable], except: [:created_at,
       :updated_at, :user_id]})
     )
+  end
+
+  def deletable
+    self.deletable || false
   end
 end
