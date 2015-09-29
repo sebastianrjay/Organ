@@ -1,38 +1,28 @@
+var handleKeyInput = function(e, actionType){
+  e.preventDefault();
+  var keyName = String.fromCharCode(e.keyCode).toLowerCase();
+  if (KeyboardNotes[keyName]) {
+    AppDispatcher.dispatch({
+      actionType: actionType,
+      key: keyName
+    });
+  }
+}
+
 window.KeyActions = {
 
-  handleMousePress: function(noteName) {
+  handleMouseInput: function(keyName, actionType) {
     AppDispatcher.dispatch({
-      actionType: KeyConstants.KEY_PRESSED,
-      key: noteName
-    });
-  },
-
-  handleMouseUp: function(noteName) {
-    AppDispatcher.dispatch({
-      actionType: KeyConstants.KEY_RELEASED,
-      key: noteName
+      actionType: actionType,
+      key: keyName
     });
   },
 
   pressKey: function(e) {
-    e.preventDefault();
-    var keyName = String.fromCharCode(e.keyCode).toLowerCase();
-    if (KeyboardNotes[keyName]) {
-      AppDispatcher.dispatch({
-        actionType: KeyConstants.KEY_PRESSED,
-        key: keyName
-      });
-    }
+    handleKeyInput(e, KeyConstants.KEY_PRESSED);
   },
 
   releaseKey: function(e) {
-    e.preventDefault();
-    var keyName = String.fromCharCode(e.keyCode).toLowerCase();
-    if (KeyboardNotes[keyName]) {
-      AppDispatcher.dispatch({
-        actionType: KeyConstants.KEY_RELEASED,
-        key: keyName
-      });
-    }
+    handleKeyInput(e, KeyConstants.KEY_RELEASED);
   }
 }

@@ -1,42 +1,26 @@
-window.KeyColors = {
-  'a': 'white',
-  'w': 'black',
-  's': 'white',
-  'e': 'black',
-  'd': 'white',
-  'f': 'white',
-  't': 'black',
-  'g': 'white',
-  'y': 'black',
-  'h': 'white',
-  'u': 'black',
-  'j': 'white',
-  'k': 'white'
-};
-
 var Organ = React.createClass({
 
   render: function() {
-    var noteNames = [];
-    for (var notename in KeyboardNotes) {
-      noteNames.push(notename);
+    var keyNames = [];
+    for (var keyName in KeyboardNotes) {
+      keyNames.push(keyName);
     }
 
     var keys = [];
 
-    noteNames.forEach(function(noteName, idx) {
-      if (KeyColors[noteName] === 'black') {
+    keyNames.forEach(function(keyName, idx) {
+      if (KeyColors[keyName] === 'black') {
         if (idx < 4) {
           var leftPos = (52 * (idx + 1) / 2) - 15;
-        } else {
+        } else if (idx < 11){
           var leftPos = (52 * (idx + 2) / 2) - 22.5;
-        }
+        } else var leftPos = (52 * (idx + 3) / 2) - 30;
 
-        keys.push(<Key key={ idx } noteName={ noteName }
-        color={ KeyColors[noteName] } style={{ left : leftPos }} />);
+        keys.push(<Key key={ idx } keyName={ keyName }
+        color={ KeyColors[keyName] } style={{ left : leftPos }} />);
       } else {
-        keys.push(<Key key={ idx } noteName={ noteName }
-        color={ KeyColors[noteName] } />);
+        keys.push(<Key key={ idx } keyName={ keyName }
+        color={ KeyColors[keyName] } />);
       }
     });
 

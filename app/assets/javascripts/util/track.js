@@ -43,8 +43,8 @@
     },
 
     playOrStopNotes: function() {
-      if(this.notesAndTimes[this.notesIdx] &&
-          (Date.now() - this.playStartTime) >= this.notesAndTimes[this.notesIdx].time) {
+      if(this.notesAndTimes[this.notesIdx] && (Date.now() - this.playStartTime) >=
+          this.notesAndTimes[this.notesIdx].time) {
         if(this.notesIdx > 0) {
           this.notesAndTimes[this.notesIdx - 1].notes.forEach(function(note) {
             note.stop();
@@ -70,8 +70,7 @@
     stopPlayback: function() {
       clearInterval(this.interval);
 
-      if (this.notesAndTimes[this.notesIdx - 1] &&
-          this.notesAndTimes[this.notesIdx - 1].notes) {
+      if ((this.notesAndTimes[this.notesIdx - 1] || {}).notes) {
         this.notesAndTimes[this.notesIdx - 1].notes.forEach(function(note) {
           note.stop();
         });

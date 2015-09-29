@@ -2,7 +2,7 @@ var Key = React.createClass({
 
   componentDidMount: function() {
     KeyStore.addChangeListener(this._onChange);
-    this.note = new Note(KeyboardNotes[this.props.noteName]);
+    this.note = new Note(KeyboardNotes[this.props.keyName]);
   },
 
   getInitialState: function() {
@@ -10,15 +10,15 @@ var Key = React.createClass({
   },
 
   handleMousePress: function() {
-    KeyActions.handleMousePress(this.props.noteName);
+    KeyActions.handleMouseInput(this.props.keyName, KeyConstants.KEY_PRESSED);
   },
 
   handleMouseUp: function() {
-    KeyActions.handleMouseUp(this.props.noteName);
+    KeyActions.handleMouseInput(this.props.keyName, KeyConstants.KEY_RELEASED);
   },
 
   _onChange: function() {
-    if(KeyStore.pressedKeys()[this.props.noteName]) {
+    if(KeyStore.pressedKeys()[this.props.keyName]) {
       this.note.start();
       this.setState({ keyState: 'pressed' });
     } else {

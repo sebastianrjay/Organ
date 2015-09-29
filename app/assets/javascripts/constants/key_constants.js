@@ -16,7 +16,12 @@ var Tones = {
   A4: 440.00,
   Bb4: 466.16,
   B4: 493.88,
-  C5: 523.25
+  C5: 523.25,
+  Db5: 554.37,
+  D5: 587.33,
+  Eb5: 622.25,
+  E5: 659.25,
+  F5: 698.46
 }
 
 window.KeyboardNotes = {
@@ -32,5 +37,31 @@ window.KeyboardNotes = {
   'h': Tones.A4,
   'u': Tones.Bb4,
   'j': Tones.B4,
-  'k': Tones.C5
+  'k': Tones.C5,
+  'o': Tones.Db5,
+  'l': Tones.D5,
+  'p': Tones.Eb5,
+  'º': Tones.E5,
+  'þ': Tones.F5
 }
+
+window.KeyColors = {
+  'a': 'white',
+  'w': 'black',
+  's': 'white',
+  'e': 'black',
+  'd': 'white',
+  'f': 'white',
+  't': 'black',
+  'g': 'white',
+  'y': 'black',
+  'h': 'white',
+  'u': 'black',
+  'j': 'white',
+  'k': 'white',
+  'o': 'black',
+  'l': 'white',
+  'p': 'black',
+  'º': 'white',
+  'þ': 'white'
+};
