@@ -8,7 +8,7 @@ class Track < ActiveRecord::Base
   }
 
   def as_json(options = {})
-    super((options || {}).merge({methods: [:deletable], except: [:created_at,
+    super(options.merge({methods: [:composer, :deletable], except: [:created_at,
       :updated_at, :user_id]})
     )
   end

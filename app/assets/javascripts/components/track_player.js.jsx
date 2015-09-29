@@ -21,6 +21,7 @@ var TrackPlayer = React.createClass({
     return (
       <div className='track-player'>
         <h5>{ this.props.track.name }</h5>
+        <h6>{ this.props.track.composer }</h6>
         <button className={ 'play-button' + playClass }
         onClick={ this.togglePlay }>{ text }</button>
         { deleteButton }

@@ -9,7 +9,8 @@
     if(this.id && (options || {}).deletable) {
       this.deletable = true;
     } else this.deletable = false;
-    this.name = (options || {}).name || "untitled";
+    this.name = (options || {}).name || "Unknown Title";
+    this.composer = (options || {}).composer || "Unknown Composer";
     this.frequenciesAndTimes = (options || {}).frequenciesAndTimes || [];
     this.recording = false;
     this.recordStartTime = null;

@@ -13,7 +13,8 @@
   var parseAndAddTracksFromDB = function(data) {
     data.forEach(function(trackData) {
       addTrack(new Track({ name: trackData.name, id: trackData.id,
-        frequenciesAndTimes: trackData.roll, deletable: trackData.deletable
+        frequenciesAndTimes: trackData.roll, deletable: trackData.deletable,
+        composer: trackData.composer.username
       }));
     });
   }
@@ -22,10 +23,12 @@
     var trackRequiringUpdate = _tracks.filter(function(track) {
       return newData.name === track.name;
     })[0] || {};
+    if (newData.composer){ newData.composer = newData.composer.username; }
     // Don't redundantly include newData.roll, which is identical to
     // track.frequenciesAndTimes
     delete newData.roll;
 
+    debugger
     $.extend(trackRequiringUpdate, newData);
   }
 
