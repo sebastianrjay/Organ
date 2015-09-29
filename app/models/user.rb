@@ -11,10 +11,6 @@ class User < ActiveRecord::Base
 
   has_many :tracks
 
-  def as_json(options = {})
-    super(options.merge({ only: [:username] }))
-  end
-
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)

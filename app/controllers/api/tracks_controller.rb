@@ -4,9 +4,9 @@ class Api::TracksController < ApplicationController
     sample_len = [Track.count, 3].min
     @tracks = Track.take(sample_len)
     @tracks.each do |track|
-      track.deletable = true if track.composer == current_user
+      track.deletable = true if current_user == track.composer
     end
-    
+
     render json: @tracks
   end
 
@@ -15,8 +15,8 @@ class Api::TracksController < ApplicationController
     @track.user_id = current_user.id
 
     if @track.save
-      flash[:errors] = []
-      render json: { id: @track.id, name: @track.name, deletable: true }
+      @track.deletable = true if current_user == @track.composer
+      render json: @track
     else
       flash[:errors] = @track.errors.full_messages
       render json: @track, status: :unprocessable_entity
@@ -26,10 +26,11 @@ class Api::TracksController < ApplicationController
   def destroy
     @track = Track.includes(:composer).find_by_id(params[:id])
 
-    if @track && @track.composer == current_user
+    if @track.composer == current_user
       @track.delete
     else
-      flash[:errors] = "You are not authorized to delete this track."
+      flash[:errors] << "You are not authorized to delete this track."
+      render json: @track, status: :unprocessable_entity
     end
 
     render json: {}

@@ -6,9 +6,7 @@
 
   window.Track = function(options) {
     this.id = (options || {}).id || null;
-    if(this.id && (options || {}).deletable) {
-      this.deletable = true;
-    } else this.deletable = false;
+    this.deletable = (options || {}).deletable;
     this.name = (options || {}).name || "Unknown Title";
     this.composer = (options || {}).composer || "Unknown Composer";
     this.frequenciesAndTimes = (options || {}).frequenciesAndTimes || [];

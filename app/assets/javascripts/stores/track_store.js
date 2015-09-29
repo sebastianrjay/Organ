@@ -14,7 +14,7 @@
     data.forEach(function(trackData) {
       addTrack(new Track({ name: trackData.name, id: trackData.id,
         frequenciesAndTimes: trackData.roll, deletable: trackData.deletable,
-        composer: trackData.composer.username
+        composer: (trackData.composer || {}).username
       }));
     });
   }
@@ -28,7 +28,6 @@
     // track.frequenciesAndTimes
     delete newData.roll;
 
-    debugger
     $.extend(trackRequiringUpdate, newData);
   }
 
@@ -76,4 +75,4 @@
   });
 })(this);
 
-ApiActions.fetchTracks();
+$(ApiActions.fetchTracks);
