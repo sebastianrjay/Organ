@@ -88,7 +88,7 @@
       }
 
       this.playStartTime = null, this.notesIdx = 0, this.playing = false,
-      this.notesAndTimes = null;
+      this.paused = false, this.notesAndTimes = null;
       TrackActions.togglePlay(this);
     },
 

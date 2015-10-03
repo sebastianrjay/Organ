@@ -5,10 +5,6 @@ var TrackPlayer = React.createClass({
     ApiActions.deleteTrack(this.props.track);
   },
 
-  getInitialState: function() {
-    return { playing: false };
-  },
-
   render: function() {
     var playClass = " fa fa-play", deleteButton = "", stopButton = "";
     if(this.props.track.playing) {
@@ -17,6 +13,7 @@ var TrackPlayer = React.createClass({
           onClick={ this.props.track.stopPlayback.bind(this.props.track) }>
           </span></button>
     }
+
     if(this.props.track.paused) playClass = " fa fa-play";
 
     if(this.props.track.deletable) {
@@ -39,10 +36,10 @@ var TrackPlayer = React.createClass({
   togglePlay: function() {
     if ((this.props.track || {}).playing && !this.props.track.paused) {
       this.props.track.pausePlayback();
-      this.setState({ playing: true });
+      this.forceUpdate();
     } else if (this.props.track) {
       this.props.track.play();
-      this.setState({ playing: true });
+      this.forceUpdate();
     }
   }
 });
