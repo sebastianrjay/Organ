@@ -10,9 +10,8 @@
     this.name = (options || {}).name || "Unknown Title";
     this.composer = (options || {}).composer || "Unknown Composer";
     this.frequenciesAndTimes = (options || {}).frequenciesAndTimes || [];
-    this.recording = false;
-    this.recordStartTime = null;
-    this.playing = false;
+    this.recording = false, this.recordStartTime = null;
+    this.playing = false, this.paused = false, this.notesIdx = null;
   }
 
   Track.prototype = {
@@ -29,15 +28,18 @@
     },
 
     play: function() {
-      this.playing = true, this.playStartTime = Date.now(), this.notesIdx = 0;
-      this.notesAndTimes = this.frequenciesAndTimes.slice(0);
-      this.notesAndTimes.map(function(hash) {
-        hash.notes = hash.frequencies.map(function(freq) {
-          return new Note(freq);
-        });
+      this.playing = true, this.playStartTime = Date.now();
+      this.notesIdx = this.notesIdx || 0;
+      if(!this.paused) {
+        this.notesAndTimes = this.frequenciesAndTimes.slice(0).map(function(hash) {
+          hash.notes = hash.frequencies.map(function(freq) {
+            return new Note(freq);
+          });
 
-        return hash;
-      });
+          return hash;
+        });
+      } else this.playStartTime = this.pauseTime;
+      this.paused = false;
       this.interval = setInterval(this.playOrStopNotes.bind(this), 1);
     },
 
@@ -62,13 +64,23 @@
       }
     },
 
+    pausePlayback: function() {
+      clearInterval(this.interval);
+      if ((this.notesAndTimes[this.notesIdx - 1] || {}).notes) {
+        this.notesAndTimes[this.notesIdx - 1].notes.forEach(function(note) {
+          note.stop();
+        });
+      }
+
+      this.paused = true, this.pauseTime = Date.now();
+    },
+
     record: function() {
       this.recording = true;
     },
 
     stopPlayback: function() {
       clearInterval(this.interval);
-
       if ((this.notesAndTimes[this.notesIdx - 1] || {}).notes) {
         this.notesAndTimes[this.notesIdx - 1].notes.forEach(function(note) {
           note.stop();

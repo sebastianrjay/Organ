@@ -2,7 +2,7 @@ class Api::TracksController < ApplicationController
 
   def index
     sample_len = [Track.count, 3].min
-    @tracks = Track.take(sample_len)
+    @tracks = Track.includes(:composer).take(sample_len)
     @tracks.each do |track|
       track.deletable = true if current_user == track.composer
     end
