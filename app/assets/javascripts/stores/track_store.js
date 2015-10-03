@@ -75,4 +75,9 @@
   });
 })(this);
 
-$(ApiActions.fetchTracks);
+
+$(function(){
+  if(User.loggedIn) {
+    ApiActions.fetchTracks();
+  }
+});

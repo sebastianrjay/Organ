@@ -2,7 +2,7 @@
   // Saves only the frequency and start time of each note to the database in
   // order to avoid JSON parsing issues. When playing a track, creates
   // this.notesAndTimes by replacing each frequency in this.frequenciesAndTimes
-  // with a note instantiated from that frequency 
+  // with a note instantiated from that frequency
 
   window.Track = function(options) {
     this.id = (options || {}).id || null;
