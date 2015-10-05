@@ -1,8 +1,8 @@
 window.TrackActions = {
 
-  addTrack: function(track) {
+  addUserTrack: function(track) {
     AppDispatcher.dispatch({
-      actionType: TrackConstants.TRACK_ADDED,
+      actionType: TrackConstants.USER_TRACK_ADDED,
       track: track
     })
   },
@@ -14,9 +14,9 @@ window.TrackActions = {
     })
   },
 
-  parseTracksFromDB: function(data) {
+  parseFeaturedTracksFromDB: function(data) {
     AppDispatcher.dispatch({
-      actionType: TrackConstants.TRACKS_FETCHED,
+      actionType: TrackConstants.FEATURED_TRACKS_FETCHED,
       data: data
     })
   },

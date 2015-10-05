@@ -86,7 +86,7 @@ var Recorder = React.createClass({
 
   saveTrack: function() {
     this.track.name = this.state.formInput;
-    TrackActions.addTrack(this.track);
+    TrackActions.addUserTrack(this.track);
     ApiActions.saveTrack(this.track);
     this.track = null;
     this.setState({ doneRecording: false, formInput: "" });

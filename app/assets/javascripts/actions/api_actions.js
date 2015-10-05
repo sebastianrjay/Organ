@@ -6,11 +6,11 @@ window.ApiActions = {
     });
   },
 
-  fetchTracks: function() {
+  fetchFeaturedTracks: function() {
     $.ajax({
       url: 'api/tracks',
       method: 'GET',
-      success: TrackActions.parseTracksFromDB
+      success: TrackActions.parseFeaturedTracksFromDB
     });
   },
 
