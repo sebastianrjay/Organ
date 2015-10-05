@@ -28,15 +28,18 @@
   }
 
   var updateTrack = function(newData) {
-    var trackRequiringUpdate = _userTracks.filter(function(track) {
-      return newData.name === track.name;
-    })[0] || {};
+    var tracksRequiringUpdate = _userTracks.concat(_featuredTracks)
+      .filter(function(track) {
+        return newData.name === track.name;
+      });
     if (newData.composer){ newData.composer = newData.composer.username; }
     // Don't redundantly include newData.roll, which is identical to
     // track.frequenciesAndTimes
     delete newData.roll;
 
-    $.extend(trackRequiringUpdate, newData);
+    tracksRequiringUpdate.forEach(function(track){
+      $.extend(track, newData);
+    });
   }
 
   var CHANGE_EVENT = "change";
