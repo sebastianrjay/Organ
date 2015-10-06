@@ -11,8 +11,8 @@ Flux architecture.
 It features:
 - Playable organ coded from scratch in JavaScript, HTML and CSS
 - Recordable, playable and savable tracks coded in JavaScript and JSX
-- Basic user auth coded from scratch in Ruby on Rails (no user auth gem),
-preventing the user from deleting tracks they did not record
+- Basic user auth coded from scratch in Ruby on Rails (no user auth gem), preventing
+the user from deleting tracks they did not record
 
 Flux architecture
 - State of updatable components (i.e. tracks and the organ) is coded from scratch
