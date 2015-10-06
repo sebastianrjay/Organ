@@ -3,7 +3,7 @@
 Organ allows you to play an organ on your computer keyboard or via your mouse,
 and to record, save and play tracks that you create on the organ. Feel free to
 play around with the {LIVE APP}[https://sheltered-brushlands-6161.herokuapp.com/]
-(Custom domain name coming soon)
+(custom domain name coming soon).
 
 This is a full-stack app, built using Ruby on Rails and ReactJS, under the
 Flux architecture.
