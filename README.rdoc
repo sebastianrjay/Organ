@@ -1,28 +1,22 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Organ allows you to play an organ on your computer keyboard or via your mouse,
+and to record, save and play tracks that you create on the organ. Feel free to
+play around with the {LIVE APP}[https://sheltered-brushlands-6161.herokuapp.com/]
+(Custom domain name coming soon)
 
-Things you may want to cover:
+This is a full-stack app, built using Ruby on Rails and ReactJS, under the
+Flux architecture.
 
-* Ruby version
+It features:
+- Playable organ coded from scratch in JavaScript, HTML and CSS
+- Recordable, playable and savable tracks coded in JavaScript and JSX
+- Basic user auth coded from scratch in Ruby on Rails (no user auth gem),
+preventing the user from deleting tracks they did not record
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Flux architecture
+- State of updatable components (i.e. tracks and the organ) is coded from scratch
+in JavaScript stores, as a very lightweight alternative to Backbone models
+- Loads and updates server-affected states exclusively via Ajax requests
+- Relies on the Node EventEmitter to alert components and stores, in order to
+very quickly update the DOM in response to user actions and server responses
