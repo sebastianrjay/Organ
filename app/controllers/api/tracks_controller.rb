@@ -1,13 +1,22 @@
 class Api::TracksController < ApplicationController
 
   def index
-    sample_len = [Track.count, 3].min
-    @tracks = Track.includes(:composer).take(sample_len)
-    @tracks.each do |track|
-      track.deletable = true if current_user == track.composer
+    # Randomly sample 3 tracks from the first 10 tracks saved to the DB; if less
+    # than 3 tracks are saved, sample the number of tracks saved
+    @tracks = Track.includes(:composer).limit(10)
+    sample_len, indexes = [Track.count, 3].min, []
+    until indexes.length == sample_len
+      new_idx = (Random.rand * @tracks.length).to_i
+      indexes << new_idx unless indexes.include?(new_idx)
     end
 
-    render json: @tracks
+    tracks = []
+    indexes.each do |idx|
+      @tracks[idx].deletable = true if current_user == @tracks[idx].composer
+      tracks << @tracks[idx]
+    end
+
+    render json: tracks
   end
 
   def create
