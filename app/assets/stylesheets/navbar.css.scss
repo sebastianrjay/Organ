@@ -1,0 +1,262 @@
+.topbar {
+    width: 100%;
+    background: #2f2f2f;
+    background: rgba(0, 0, 0, 0.86);
+    height: 34px;
+    line-height: 1
+}
+.topbar input[type="text"] {
+    transition: none;
+    border: 1px solid #cbcbcb;
+    font-size: 100%;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    border-radius: 0;
+    padding: 3px;
+    margin: 5px 0 5px 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0
+}
+.topbar .topbar-wrapper {
+    width: 980px;
+    margin: 0 auto;
+    height: 34px;
+    text-align: left;
+    position: relative
+}
+.topbar .network-items {
+    display: inline-block;
+    vertical-align: top
+}
+.topbar .hidden-text {
+    position: absolute;
+    top: -200px
+}
+.topbar .icon-site-switcher {
+    width: 150px;
+    background-position: 10px -20px
+}
+.topbar .icon-site-switcher-on {
+    background-color: #f0f0f0;
+    background-position: 10px -51px
+}
+.topbar .icon-inbox {
+    width: 36px;
+    background-position: -141px -54px;
+    position: relative
+}
+.topbar .icon-inbox .unread-count {
+    background-color: #f00;
+    display: inline-block;
+    margin-top: 9px;
+    color: #fff;
+    text-indent: 0;
+    border-radius: 2px;
+    padding: 1px 6px 1px 6px;
+    font-size: 11px;
+    line-height: 1;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important
+}
+.topbar .icon-achievements {
+    width: 36px;
+    background-position: -220px -54px;
+    position: relative
+}
+.topbar .icon-achievements.icon-achievements-unread {
+    background-position: -260px -54px
+}
+.topbar .icon-achievements .unread-count {
+    background-color: #33a030;
+    display: inline-block;
+    margin-top: 9px;
+    color: #fff;
+    text-indent: 0;
+    border-radius: 2px;
+    padding: 1px 6px 1px 6px;
+    font-size: 11px;
+    line-height: 1;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important
+}
+.topbar .icon-inbox-mod {
+    width: 29px;
+    background-position: -140px -87px
+}
+.topbar .icon-inbox-mod.icon-inbox-mod-unread {
+    background-position: -220px -87px
+}
+.topbar .icon-inbox-mod.icon-inbox-mod-announcements {
+    background-position: -160px -87px
+}
+.topbar .icon-help {
+    padding-right: 4px !important
+}
+.topbar .icon-help.topbar-icon-on {
+    color: rgba(0, 0, 0, 0.86) !important
+}
+.topbar .icon-help .triangle {
+    background-position: -119px -30px;
+    display: inline-block;
+    width: 11px;
+    height: 13px;
+    vertical-align: top
+}
+.topbar .topbar-icon {
+    display: inline-block;
+    height: 34px;
+    vertical-align: top;
+    text-align: center
+}
+.topbar .yes-hover:hover {
+    background-color: #444;
+    text-decoration: none !important
+}
+.topbar .topbar-icon-on,
+.topbar .topbar-icon-on:hover {
+    background-color: #f0f0f0 !important
+}
+.topbar .topbar-links {
+    vertical-align: top;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 13px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important
+}
+.topbar .topbar-links .mod-only {
+    display: inline-block;
+    vertical-align: top
+}
+.topbar .topbar-links .icon-flag {
+    background-image: none;
+    min-width: 30px;
+    text-indent: 0;
+    position: relative;
+    color: #fff
+}
+.topbar .topbar-links .icon-flag .unread-count {
+    display: inline-block;
+    margin-top: 9px;
+    color: #fff;
+    text-indent: 0;
+    border-radius: 2px;
+    padding: 1px 6px 1px 6px;
+    font-size: 11px;
+    line-height: 1;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    margin-left: 7px;
+    margin-right: 7px
+}
+.topbar .topbar-links .icon-flag .flag-count {
+    background-color: #1e7ecc
+}
+.topbar .topbar-links .icon-flag .edit-count {
+    background-color: #cf7721
+}
+.topbar .topbar-links .icon-flag.icon-tools-flag {
+    padding: 9px 0 0
+}
+.topbar .topbar-links .icon-flag.icon-tools-flag .unread-count {
+    margin-top: 0
+}
+.topbar .topbar-links .profile-me {
+    display: inline-block;
+    height: 34px;
+    background-color: transparent;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 15px
+}
+.topbar .topbar-links .profile-me>div {
+    display: inline-block
+}
+.topbar .topbar-links .profile-me .avatar-me {
+    padding: 4px;
+    height: 24px;
+    width: 24px;
+    margin-top: 1px
+}
+.topbar .topbar-links .profile-me:hover {
+    background-color: #444;
+    text-decoration: none !important
+}
+.topbar .topbar-links .profile-me-on {
+    background-color: #f0f0f0 !important
+}
+.topbar .topbar-links .topbar-flair {
+    font-size: 13px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    text-decoration: none
+}
+.topbar .topbar-links .topbar-flair .reputation {
+    padding-right: 5px
+}
+.topbar .topbar-links .topbar-flair .badge1,
+.topbar .topbar-links .topbar-flair .badge2,
+.topbar .topbar-links .topbar-flair .badge3 {
+    padding-right: 3px
+}
+.topbar .topbar-links .topbar-flair .badgecount {
+    padding-right: 4px;
+    font-size: 13px;
+    font-weight: normal
+}
+.topbar .topbar-links .topbar-flair .reputation,
+.topbar .topbar-links .topbar-flair .badgecount {
+    color: #e0e0e0
+}
+.topbar .topbar-links .topbar-menu-links {
+    margin-left: 15px;
+    margin-top: -10px;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 0
+}
+.topbar .topbar-links .topbar-menu-links a,
+.topbar .topbar-links .topbar-menu-links a:visited {
+    color: #e0e0e0;
+    text-decoration: none;
+    display: inline-block;
+    height: 24px;
+    padding: 10px 7px 0 7px;
+    vertical-align: top;
+    font-size: 13px
+}
+.topbar .topbar-links .topbar-menu-links a:hover {
+    background-color: #444
+}
+.topbar .topbar-links .links-container {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 10px
+}
+.topbar .topbar-links .search-container {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 1px
+}
+.topbar .topbar-links .search-container input[type=text] {
+    width: 188px;
+    height: 16px;
+    margin-left: 20px;
+    margin-bottom: 0;
+    font-size: 13px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    color: #888;
+    border: 1px solid #000;
+    padding-left: inherit;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+    padding-right: 5px;
+    background-image: url('../img/share-sprite-new.png?v=28cc2da3244c');
+    background-image: url('../img/share-sprite-new.svg?v=d09c08f3cb07'), none;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    background-position: -269px -92px !important;
+    padding-left: 22px !important
+}
+.topbar .topbar-links .search-container input[type=text]:focus {
+    color: #444
+}
+.topbar .topbar-links .search-container form {
+    margin: 0;
+    padding: 0
+}
