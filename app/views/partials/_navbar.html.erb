@@ -1,25 +1,14 @@
 <div class="topbar">
-    <div class="topbar-wrapper">
-
-        <div class="js-topbar-dialog-corral">
-        </div>
-
-        <div class="network-items">
-
-            <a href="//stackexchange.com" class="topbar-icon icon-site-switcher yes-hover js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 150 Stack Exchange sites">
-                <span class="hidden-text">Stack Exchange</span>
-            </a>
-
-        </div>
-
-        <div class="topbar-links">
-
-            <div class="search-container">
-                <form id="search" action="/search" method="get" autocomplete="off">
-                    <input name="q" type="text" placeholder="search" value="" tabindex="1" autocomplete="off" maxlength="240">
-                </form>
-            </div>
-
-        </div>
-    </div>
+  <ul>
+    <li>
+      <form class="sign-out" action="<%= session_url %>" method="POST">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="DELETE">
+        <input class="logout-button" type="submit" value="Log Out">
+      </form>
+    </li>
+    <li>
+      <p id="user-greeting"><b>Welcome back, <%= current_user.username %>!</b></p>
+    </li>
+  </ul>
 </div>

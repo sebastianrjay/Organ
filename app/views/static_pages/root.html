@@ -1,13 +1,5 @@
 <section class="row">
-  <div class="col-md-1">
-    <form class="sign-out" action="<%= session_url %>" method="POST">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-	    <input type="hidden" name="_method" value="DELETE">
-	    <input type="submit" value="Log Out">
-	  </form>
-    <br><br>
-    <p id="user-greeting"><b>Welcome back, <%= current_user.username %>!</b></p>
-  </div>
+  <div class="col-md-1"></div>
   <div id='content' class="col-md-7">
     <div id='organ'></div>
     <div id='recorder'></div>
