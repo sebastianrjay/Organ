@@ -1,17 +1,15 @@
-.topbar {
+.navbar {
     width: 100%;
     background: #2f2f2f;
     background: rgba(0, 0, 0, 0.86);
-    height: 34px;
-    line-height: 1
+    line-height: 1;
+    border-radius: 0px;
+    margin-bottom: 0px;
 }
-.topbar #user-greeting {
+.navbar #user-greeting {
   color: white;
 }
-.topbar .logout-button {
-  font-size: 18px;
-}
-.topbar input[type="text"] {
+.navbar input[type="text"] {
     transition: none;
     border: 1px solid #cbcbcb;
     font-size: 100%;
@@ -20,5 +18,18 @@
     padding: 3px;
     margin: 5px 0 5px 0;
     -moz-border-radius: 0;
-    -webkit-border-radius: 0
+    -webkit-border-radius: 0;
+}
+.navbar p {
+  font-size: 16px;
+  padding-top: 16px;
+}
+.sign-out-btn {
+  font-weight: bold;
+}
+.sign-out {
+  margin-top: 6px;
+  margin-left: 6px;
+  float: left;
+  position: relative;
 }

@@ -1,14 +1,8 @@
-<div class="topbar">
-  <ul>
-    <li>
-      <form class="sign-out" action="<%= session_url %>" method="POST">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-        <input type="hidden" name="_method" value="DELETE">
-        <input class="logout-button" type="submit" value="Log Out">
-      </form>
-    </li>
-    <li>
-      <p id="user-greeting"><b>Welcome back, <%= current_user.username %>!</b></p>
-    </li>
-  </ul>
-</div>
+<nav class="navbar" role="toolbar">
+  <form class="sign-out" action="<%= session_url %>" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="_method" value="DELETE">
+    <input class="btn btn-default sign-out-btn" type="submit" value="Log Out">
+  </form>
+  <p id="user-greeting"><b>Welcome back, <%= current_user.username %>!</b></p>
+</nav>
