@@ -48,12 +48,17 @@
           this.notesAndTimes[this.notesIdx].time) {
         if(this.notesIdx > 0) {
           this.notesAndTimes[this.notesIdx - 1].notes.forEach(function(note) {
-            note.stop();
-          });
+            if(!this.notesAndTimes[this.notesIdx].notes.indexOf(note) !== -1) {
+              note.stop();
+            }
+          }.bind(this));
         }
 
         this.notesAndTimes[this.notesIdx].notes.forEach(function(note) {
-          note.start();
+          if(this.notesIdx === 0 ||
+              !this.notesAndTimes[this.notesIdx - 1].notes.indexOf(note) !== -1) {
+            note.start();
+          }
         }.bind(this));
 
         this.notesIdx++;
