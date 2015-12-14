@@ -30,7 +30,7 @@ class Api::TracksController < ApplicationController
     if @track.composer == current_user
       @track.delete
     else
-      flash[:errors] << "You are not authorized to delete this track."
+      flash.now[:errors] = ["You are not authorized to delete this track."]
       render json: @track, status: :unprocessable_entity
     end
 
