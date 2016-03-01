@@ -6,7 +6,7 @@ var Key = React.createClass({
   },
 
   getInitialState: function() {
-    return { style: 'released' };
+    return { keyState: 'released' };
   },
 
   handleMousePress: function() {
