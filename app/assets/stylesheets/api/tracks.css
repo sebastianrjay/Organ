@@ -30,6 +30,11 @@
 	text-align: center;
 }
 
+.track-player h5 {
+	max-height: 14px;
+	color: #FFFFFF;
+}
+
 .track-player h6 {
 	color: #FFFFFF;
 	padding-top: 12px;
