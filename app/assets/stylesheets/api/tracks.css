@@ -1,0 +1,42 @@
+// Place all the styles related to the Api/Tracks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#featured-tracks {
+	margin: 30px;
+}
+
+.jukebox-container-featured {
+	padding-top: 30px;
+}
+
+.jukebox-container-featured h3 {
+	margin-left: 30px;
+}
+
+.track-player-container {
+	margin: 20px;
+	height: 160px;
+	width: 220px;
+	padding-top: 62px;
+	background-image: url('../../images/boombox.png');
+	background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+}
+
+.track-player {
+	padding-top: -10px;
+	text-align: center;
+}
+
+.track-player h6 {
+	color: #000000;
+	padding-top: 12px;
+	margin-bottom: 9px;
+}
+
+.track-player-controls {
+	margin-top: -2px;
+	display: inline-block;
+}

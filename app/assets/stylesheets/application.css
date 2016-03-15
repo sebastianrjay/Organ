@@ -6,10 +6,37 @@
  *= require_self
 */
 
+.error-msg {
+	color: red;
+	font-weight: bold;
+	list-style: none;
+}
+
 #user-greeting {
   text-align: center;
 }
 
 body {
   background-color: #F8F8F8;
+}
+
+footer {
+	padding: 50px;
+	text-align: center;
+}
+
+.piano-img-container {
+	background-color: #FFFFFF;
+}
+
+.piano-img {
+	background-image: url('../images/organ.jpg');
+	margin: auto;
+	width: 100%;
+	height: 670px;
+	padding: 30px;
+}
+
+#splash-logo {
+	margin-top: 40px;
 }

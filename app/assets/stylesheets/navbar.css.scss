@@ -1,36 +1,70 @@
-.navbar {
-    width: 100%;
-    background: #2f2f2f;
-    background: rgba(0, 0, 0, 0.86);
-    line-height: 1;
-    border-radius: 0px;
-    margin-bottom: 0px;
-}
-.navbar #user-greeting {
-  font-weight: bold;
-  color: white;
-}
-.navbar input[type="text"] {
-    transition: none;
-    border: 1px solid #cbcbcb;
-    font-size: 100%;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-    border-radius: 0;
-    padding: 3px;
-    margin: 5px 0 5px 0;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-}
-.navbar p {
-  font-size: 16px;
-  padding-top: 16px;
-}
-.sign-out {
-  margin-top: 7px;
-  margin-left: 6px;
-  float: left;
+nav {
+  background: #2f2f2f;
+  background: rgba(0, 0, 0, 0.86);
   position: relative;
+  height: 60px;
+  width: 100%;
+  margin-left: 0!important;
+  margin-right: 0!important;
+  white-space: nowrap;
 }
+
+.left-container, .right-container {
+  height: 60px;
+  line-height: 58px;
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+  width: 152px;
+  z-index: 987;
+}
+
+.left-container {
+  float: left;
+}
+
+.left-container a:hover, .right-container a:hover {
+  text-decoration: none;
+}
+
+.right-container {
+  float: right;
+}
+
+#logo-helper, .left-buffer {
+  display: inline-block;
+  width: 15%;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.left-buffer {
+  width: 10%;
+}
+
+#logo {
+  height: 31px;
+  margin: auto;
+  vertical-align: middle;
+}
+
+#user-greeting {
+  color: white;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  margin: auto;
+  padding-top: 22px;
+  max-width: 200px;
+}
+
+.sign-out {
+  float: left;
+  margin: auto;
+  position: relative;
+  vertical-align: middle;
+}
+
 .sign-out-btn {
   font-weight: bold;
 }

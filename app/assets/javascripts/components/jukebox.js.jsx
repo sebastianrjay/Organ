@@ -26,7 +26,7 @@ var Jukebox = React.createClass({
     ", click the 'Record' button below the keyboard and start playing. When" +
     " finished, click the 'Stop Recording' button. To play the organ, use " +
     "the keys between Caps Lock and Return on your keyboard for the white " +
-    "keys, and the keys between Tab and \\ for the black keys. You can also" +
+    "keys, and the keys between q and p for the black keys. You can also" +
     " play a key by selecting and pressing it with the mouse pointer." }</h4>)
   },
 
@@ -48,7 +48,7 @@ var Jukebox = React.createClass({
     }
 
     return (
-      <div>
+      <div className={ 'col-md-12 jukebox-container-' + this.props.role }>
         <h3>{ hText }</h3>
         <br />
         { content }

@@ -1,15 +1,25 @@
-<% if flash[:errors] && flash[:errors].is_a?(Array) && !flash[:errors].empty? %>
-<br>
-  <ul>
-    <% flash[:errors].each do |error| %>
-    <li> <%= error %> </li>
-    <% end %>
-  </ul>
-<br>
-<% elsif flash[:errors] %>
-<br>
-  <ul>
-    <li> <%= flash[:errors] %> </li>
-  </ul>
-<br>
-<% end %>
+<section class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<% if flash[:errors] && flash[:errors].is_a?(Array) && !flash[:errors].empty? %>
+		<br>
+		  <ul>
+		    <% flash[:errors].each do |error| %>
+		    <li class="error-msg"> 
+		    	<img src="<%= image_path 'error_icon.png' %>"></img> <%= error %>
+		    </li>
+		    <% end %>
+		  </ul>
+		<br>
+		<% elsif flash[:errors] %>
+		<br>
+		  <ul>
+		  	<li class="error-msg"> 
+		    	<img src="<%= image_path 'error_icon.png' %>"></img> <%= flash[:errors] %>
+		    </li>
+		  </ul>
+		<br>
+		<% end %>
+	</div>
+	<div class="col-md-4"></div>
+</section>

@@ -22,13 +22,17 @@ var TrackPlayer = React.createClass({
     }
 
     return (
-      <div className='track-player'>
-        <h5>{ this.props.track.name }</h5>
-        <h6>{ this.props.track.composer }</h6>
-        <button><span className={ 'play-button' + playClass }
-        onClick={ this.togglePlay }></span></button>
-        { stopButton }
-        { deleteButton }
+      <div className='track-player-container'>
+        <div className='track-player'>
+          <h5>"{ this.props.track.name }"</h5>
+          <h6>{ this.props.track.composer }</h6>
+          <div className='track-player-controls'>
+            <button><span className={ 'play-button' + playClass }
+            onClick={ this.togglePlay }></span></button>
+            { stopButton }
+            { deleteButton }
+          </div>
+        </div>
       </div>
     )
   },

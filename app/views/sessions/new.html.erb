@@ -1,29 +1,33 @@
-<section class="row">
-	<div class="container">
-		<div class="col-md-4">
-		</div>
+<div class="piano-img">
+	<section class="row">
+		<div class="container">
+			<div class="col-md-4">
+			  <form class"form-signin" method="post" action="<%= session_url %>" role="form">
+					<h1 class="form-signin-heading login-header">Log In</h1>
+					<h4 class="login-header">Not a member yet? <a href="../users/new">Sign Up</a></h4>
+			    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			    <input type="text" class="form-control" name="user[username]"
+			        placeholder="Username" required autofocus>
+				  <input type="password" name="user[password]"
+			        class="form-control" placeholder="Password" required autofocus>
+					<input type="submit" class="btn btn-lg btn-block btn-default" value="Log In">
+				</form>
+			  <form method="post" action="<%= session_url %>" role="form">
+			    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-		<div class="col-md-4">
-		  <form class"form-signin" method="post" action="<%= session_url %>" role="form">
-				<h1 class="form-signin-heading login-header">Log In</h1>
-				<h4 class="login-header">Not a member yet? <a href="../users/new">Sign Up</a></h4>
-		    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-		    <input type="text" class="form-control" name="user[username]"
-		        placeholder="Username" required autofocus>
-			  <input type="password" name="user[password]"
-		        class="form-control" placeholder="Password" required autofocus>
-				<input type="submit" class="btn btn-lg btn-block btn-default" value="Log In">
-			</form>
-		  <form method="post" action="<%= session_url %>" role="form">
-		    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			    <input type="hidden" name="user[username]" value="guest">
+			    <input type="hidden" name="user[password]" value="guesstheguest">
+			  	<input type="submit" class="btn btn-lg btn-block btn-primary" value="Guest Login">
+			  </form>
+			</div>
 
-		    <input type="hidden" name="user[username]" value="guest">
-		    <input type="hidden" name="user[password]" value="guesstheguest">
-		  	<input type="submit" class="btn btn-lg btn-block btn-primary" value="Guest Login">
-		  </form>
-		</div>
+			<div class="col-md-1"></div>
 
-		<div class="col-md-4">
+			<div class="col-md-2">
+				<img src="<%= image_path 'organ_logo.png' %>" id="splash-logo"></img>
+			</div>
+
+			<div class="col-md-5"></div>
 		</div>
-	</div>
-</section>
+	</section>
+</div>

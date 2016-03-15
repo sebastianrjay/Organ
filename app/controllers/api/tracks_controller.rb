@@ -19,7 +19,7 @@ class Api::TracksController < ApplicationController
       @track.deletable = true if current_user == @track.composer
       render json: @track
     else
-      flash[:errors] = @track.errors.full_messages
+      flash.now[:errors] = @track.errors.full_messages
       render json: @track, status: :unprocessable_entity
     end
   end
@@ -29,12 +29,11 @@ class Api::TracksController < ApplicationController
 
     if @track.composer == current_user
       @track.delete
+      render json: {}
     else
       flash.now[:errors] = ["You are not authorized to delete this track."]
       render json: @track, status: :unprocessable_entity
     end
-
-    render json: {}
   end
 
   private
