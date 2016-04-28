@@ -1,8 +1,10 @@
+$nav-height: 60px;
+
 nav {
   background: #2f2f2f;
   background: rgba(0, 0, 0, 0.86);
   position: relative;
-  height: 60px;
+  height: $nav-height;
   width: 100%;
   margin-left: 0!important;
   margin-right: 0!important;
@@ -10,7 +12,7 @@ nav {
 }
 
 .left-container, .right-container {
-  height: 60px;
+  height: $nav-height;
   line-height: 58px;
   overflow: hidden;
   position: relative;
@@ -23,8 +25,10 @@ nav {
   float: left;
 }
 
-.left-container a:hover, .right-container a:hover {
-  text-decoration: none;
+.left-container, .right-container {
+  a:hover {
+    text-decoration: none;
+  }
 }
 
 .right-container {
