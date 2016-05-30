@@ -2,15 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#featured-tracks {
+#recent-tracks {
 	margin-top: 30px;
 }
 
-.jukebox-container-featured {
+.jukebox-container-recent {
 	padding-top: 30px;
 }
 
-.jukebox-container-featured h3 {
+.jukebox-container-recent h3 {
 	padding-left: 30px;
 }
 

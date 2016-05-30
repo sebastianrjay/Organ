@@ -1,8 +1,12 @@
 class Api::TracksController < ApplicationController
 
-  def index
+  before_action :require_logged_in!
+
+  def recent
+    # Randomly sample at most 3 of the most recently created tracks
     sample_len = [Track.count, 3].min
-    @tracks = Track.includes(:composer).limit(10).sample(sample_len)
+    @tracks = Track.includes(:composer).order(created_at: :desc)
+                    .limit(10).sample(sample_len)
 
     @tracks.each do |track|
       track.deletable = true if current_user == track.composer

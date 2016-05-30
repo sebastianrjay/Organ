@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resource :session, only: [:create, :destroy, :new]
 
   namespace :api, defaults: { format: :json } do
-    resources :tracks, only: [:index, :create, :destroy]
+    resources :tracks, only: [:create, :destroy]
+    get 'tracks/recent' => 'tracks#recent'
   end
 end

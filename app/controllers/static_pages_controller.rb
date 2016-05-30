@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  def root
-    logged_in? ? render(:root) : redirect_to(new_session_url)
-  end
+	before_action :require_logged_in!
+	
+  def root; end
 end

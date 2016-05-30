@@ -6,11 +6,9 @@ class SessionsController < ApplicationController
   def new; end
 
   def create
-    user = User.find_by_credentials(
-      params[:user][:username],
-      params[:user][:password]
-    )
-    if user
+    user = User.find_by_username(params[:user][:username])
+    
+    if user && user.try(:authenticate, params[:user][:password])
       login!(user)
       redirect_to root_url
     else

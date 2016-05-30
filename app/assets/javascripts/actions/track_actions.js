@@ -14,9 +14,9 @@ window.TrackActions = {
     })
   },
 
-  parseFeaturedTracksFromDB: function(data) {
+  parseRecentTracksFromDB: function(data) {
     AppDispatcher.dispatch({
-      actionType: TrackConstants.FEATURED_TRACKS_FETCHED,
+      actionType: TrackConstants.RECENT_TRACKS_FETCHED,
       data: data
     })
   },

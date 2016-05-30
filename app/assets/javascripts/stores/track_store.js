@@ -1,9 +1,9 @@
 ;(function(root){
-  var _featuredTracks = [], _userTracks = [];
+  var _recentTracks = [], _userTracks = [];
 
-  var addFeaturedTrack = function(track) {
-    track.role = 'featured';
-    _featuredTracks.push(track);
+  var addRecentTrack = function(track) {
+    track.role = 'recent';
+    _recentTracks.push(track);
   }
 
   var addUserTrack = function(track) {
@@ -12,13 +12,13 @@
   }
 
   var deleteTrack = function(track) {
-    var tracksArr = (track.role === 'user') ? _userTracks : _featuredTracks;
+    var tracksArr = (track.role === 'user') ? _userTracks : _recentTracks;
     var idx = tracksArr.indexOf(track);
     tracksArr.splice(idx, 1);
   }
 
-  var parseAndAddTracksFromDB = function(data, tracksAreFeatured) {
-    var addFn = tracksAreFeatured ? addFeaturedTrack : addUserTrack;
+  var parseAndAddTracksFromDB = function(data, tracksAreRecent) {
+    var addFn = tracksAreRecent ? addRecentTrack : addUserTrack;
     data.forEach(function(trackData) {
       addFn(new Track({ name: trackData.name, id: trackData.id,
         frequenciesAndTimes: trackData.roll, deletable: trackData.deletable,
@@ -28,7 +28,7 @@
   }
 
   var updateTrack = function(newData) {
-    var tracksRequiringUpdate = _userTracks.concat(_featuredTracks)
+    var tracksRequiringUpdate = _userTracks.concat(_recentTracks)
       .filter(function(track) {
         return newData.name === track.name;
       });
@@ -54,8 +54,8 @@
       this.removeListener(CHANGE_EVENT, callback);
     },
 
-    featuredTracks: function() {
-      return _featuredTracks.slice(0);
+    recentTracks: function() {
+      return _recentTracks.slice(0);
     },
 
     userTracks: function() {
@@ -79,7 +79,7 @@
           updateTrack(payload.newData);
           TrackStore.emit(CHANGE_EVENT);
           break;
-        case TrackConstants.FEATURED_TRACKS_FETCHED:
+        case TrackConstants.RECENT_TRACKS_FETCHED:
           parseAndAddTracksFromDB(payload.data, true);
           TrackStore.emit(CHANGE_EVENT);
           break;
@@ -93,6 +93,6 @@
 
 $(function(){
   if(User.loggedIn) {
-    ApiActions.fetchFeaturedTracks();
+    ApiActions.fetchRecentTracks();
   }
 });

@@ -6,11 +6,11 @@ window.ApiActions = {
     });
   },
 
-  fetchFeaturedTracks: function() {
+  fetchRecentTracks: function() {
     $.ajax({
-      url: 'api/tracks',
-      method: 'GET',
-      success: TrackActions.parseFeaturedTracksFromDB
+      url: 'api/tracks/recent',
+      success: TrackActions.parseRecentTracksFromDB,
+      method: 'GET'
     });
   },
 
@@ -19,9 +19,9 @@ window.ApiActions = {
 
     $.ajax({
       url: 'api/tracks',
-      method: 'POST',
       data: { track: data },
-      success: TrackActions.updateTrack
+      success: TrackActions.updateTrack,
+      method: 'POST'
     });
   }
 }
