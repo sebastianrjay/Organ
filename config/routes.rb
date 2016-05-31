@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :tracks, only: [:create, :destroy]
     get 'tracks/recent' => 'tracks#recent'
+    get 'tracks/search' => 'tracks#search'
   end
 end
