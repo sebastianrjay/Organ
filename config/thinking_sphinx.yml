@@ -1,0 +1,14 @@
+development:
+  enable_star: true
+  expand_keywords: true
+  indexed_models:
+    - Track
+  min_infix_len: 2
+production:
+  enable_star: true
+  expand_keywords: true
+  min_infix_len: 2
+test:
+  enable_star: true
+  expand_keywords: true
+  min_infix_len: 2

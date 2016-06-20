@@ -103,11 +103,9 @@ var Recorder = React.createClass({
   },
 
   toggleRecord: function() {
-    if (!this.track){
-      this.track = new Track();
-      this.track.record();
-      this.setState({ recording: true, doneRecording: false });
-    } else if (!this.track.recording){
+    if (!this.track) this.track = new Track();
+    
+    if (!this.track.recording){
       this.track.record();
       this.setState({ recording: true, doneRecording: false });
     } else {

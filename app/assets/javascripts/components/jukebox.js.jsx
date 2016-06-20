@@ -9,16 +9,25 @@ var Jukebox = React.createClass({
   },
 
   componentWillMount: function() {
-    if(this.props.role === 'user') {
-      this.tracksGetter = TrackStore.userTracks;
-    } else if(this.props.role === 'recent') {
-      this.tracksGetter = TrackStore.recentTracks;
-    }
+    this.tracksGetter = function() {
+      return TrackStore.tracks(this.props.role);
+    }.bind(this);
   },
 
   getInitialState: function() {
     var tracks = this.tracksGetter ? this.tracksGetter() : [];
     return { tracks: tracks };
+  },
+
+  headerText: function() {
+    switch(this.props.role) {
+      case 'user':
+        return 'Your Tracks:';
+      case 'recent':
+        return 'Recent Tracks';
+      case 'search':
+        return 'Search Results';
+    }
   },
 
   userInstructions: function() {
@@ -32,24 +41,23 @@ var Jukebox = React.createClass({
 
   render: function() {
     var content, i = 0;
-    var hText = this.props.role === 'user' ? 'Your Tracks:' : 'Recent Tracks:';
     if(this.props.role == 'user' && this.state.tracks.length === 0) {
       content = this.userInstructions();
-    } else if (this.props.role == 'recent' && this.state.tracks.length === 0) {
+    } else if (this.state.tracks.length === 0) {
       content = <h4>{ "Loading..." }</h4>
     } else {
       content = <div className={ 'jukebox ' + this.props.role }>
         { this.state.tracks.map(function(track) {
           return (
-            <TrackPlayer key={ ++i } track={ track } />
+            <TrackPlayer key={ ++i } track={ track } role={ this.props.role } />
           )
-        }) }
+        }.bind(this)) }
       </div>
     }
 
     return (
       <div className={ 'col-md-12 jukebox-container-' + this.props.role }>
-        <h3>{ hText }</h3>
+        <h3>{ this.headerText() }</h3>
         <br />
         { content }
       </div>

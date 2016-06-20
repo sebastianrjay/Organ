@@ -6,16 +6,20 @@ window.ApiActions = {
     });
   },
 
-  fetchRecentTracks: function() {
+  fetchTracks: function(role, query) {
     $.ajax({
-      url: 'api/tracks/recent',
-      success: TrackActions.parseRecentTracksFromDB,
-      method: 'GET'
+      url: 'api/tracks/' + role,
+      data: { query: query },
+      success: function(data) {
+        TrackActions.parseTracksFromDB(data, role);
+      },
+      method: (role === 'search' ? 'POST' : 'GET')
     });
   },
 
   saveTrack: function(track) {
-    data = { name: track.name, roll: JSON.stringify(track.frequenciesAndTimes) };
+    var data = { name: track.name, 
+      roll: JSON.stringify(track.frequenciesAndTimes) };
 
     $.ajax({
       url: 'api/tracks',

@@ -1,7 +1,7 @@
 var TrackPlayer = React.createClass({
 
   deleteTrack: function() {
-    TrackActions.deleteTrack(this.props.track);
+    TrackActions.deleteTrack(this.props.track, this.props.role);
     ApiActions.deleteTrack(this.props.track);
   },
 

@@ -1,11 +1,11 @@
 class Track < ActiveRecord::Base
-  include Elasticsearch::Model
-  
   attr_writer :deletable
 
   validates :name, presence: true, uniqueness: true
 
   belongs_to :composer, class_name: 'User', foreign_key: :user_id
+
+  after_save ThinkingSphinx::RealTime.callback_for(:track)
 
   def as_json(options = {})
     # Normally it's bad practice to monkey-patch the JSON conversion for all 

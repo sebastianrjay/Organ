@@ -1,46 +1,51 @@
 ;(function(root){
-  var _recentTracks = [], _userTracks = [];
+  var _trackStores = { recent: [], search: [], user: [] };
 
-  var addRecentTrack = function(track) {
-    track.role = 'recent';
-    _recentTracks.push(track);
-  }
+  var addTrack = function(track, role) {
+    _trackStores[role].push(track);
+  };
 
-  var addUserTrack = function(track) {
-    track.role = 'user';
-    _userTracks.push(track);
-  }
+  var allTracks = function() {
+    return Object.keys(_trackStores)
+      .map(function(trackType) { return _trackStores[trackType]; })
+      .reduce(function(allTracks, tracks) { return allTracks.concat(tracks); });
+  };
 
-  var deleteTrack = function(track) {
-    var tracksArr = (track.role === 'user') ? _userTracks : _recentTracks;
-    var idx = tracksArr.indexOf(track);
-    tracksArr.splice(idx, 1);
-  }
+  var deleteTrack = function(track, role) {
+    var idx = _trackStores[role].indexOf(track);
+    _trackStores[role].splice(idx, 1);
+  };
 
-  var parseAndAddTracksFromDB = function(data, tracksAreRecent) {
-    var addFn = tracksAreRecent ? addRecentTrack : addUserTrack;
+  var parseAndAddTracksFromDB = function(data, role) {
+    _trackStores[role] = [];
+
     data.forEach(function(trackData) {
-      addFn(new Track({ name: trackData.name, id: trackData.id,
-        frequenciesAndTimes: trackData.roll, deletable: trackData.deletable,
+      var newTrack = new Track({
+        name: trackData.name,
+        id: trackData.id,
+        frequenciesAndTimes: trackData.roll,
+        deletable: trackData.deletable,
         composer: (trackData.composer || {}).username
-      }));
+      });
+      
+      addTrack(newTrack, role);
     });
-  }
+  };
 
   var updateTrack = function(newData) {
-    var tracksRequiringUpdate = _userTracks.concat(_recentTracks)
-      .filter(function(track) {
-        return newData.name === track.name;
-      });
-    if (newData.composer){ newData.composer = newData.composer.username; }
+    var tracksRequiringUpdate = allTracks().filter(function(track) {
+      return newData.name === track.name;
+    });
+
+    if(newData.composer) { newData.composer = newData.composer.username; }
     // Don't redundantly include newData.roll, which is identical to
-    // track.frequenciesAndTimes
+    // track.frequenciesAndTimes and never changes
     delete newData.roll;
 
     tracksRequiringUpdate.forEach(function(track){
       $.extend(track, newData);
     });
-  }
+  };
 
   var CHANGE_EVENT = "change";
 
@@ -54,38 +59,31 @@
       this.removeListener(CHANGE_EVENT, callback);
     },
 
-    recentTracks: function() {
-      return _recentTracks.slice(0);
-    },
-
-    userTracks: function() {
-      return _userTracks.slice(0);
+    tracks: function(trackType) {
+      return _trackStores[trackType].slice(0);
     },
 
     dispatcherID: AppDispatcher.register(function (payload) {
       switch(payload.actionType) {
         case TrackConstants.USER_TRACK_ADDED:
-          addUserTrack(payload.track);
-          TrackStore.emit(CHANGE_EVENT);
+          addTrack(payload.track, 'user');
           break;
         case TrackConstants.TRACK_DELETED:
-          deleteTrack(payload.track);
-          TrackStore.emit(CHANGE_EVENT);
+          deleteTrack(payload.track, payload.role);
           break;
         case TrackConstants.TRACK_PLAYBACK_TOGGLED:
-          TrackStore.emit(CHANGE_EVENT);
           break;
         case TrackConstants.TRACK_UPDATED:
           updateTrack(payload.newData);
-          TrackStore.emit(CHANGE_EVENT);
           break;
         case TrackConstants.RECENT_TRACKS_FETCHED:
-          parseAndAddTracksFromDB(payload.data, true);
-          TrackStore.emit(CHANGE_EVENT);
+        case TrackConstants.SEARCH_TRACKS_FETCHED:
+          parseAndAddTracksFromDB(payload.data, 
+            payload.actionType.slice(0, 6).toLowerCase());
           break;
       }
 
-      return true;
+      TrackStore.emit(CHANGE_EVENT);
     })
   });
 })(this);
@@ -93,6 +91,6 @@
 
 $(function(){
   if(User.loggedIn) {
-    ApiActions.fetchRecentTracks();
+    ApiActions.fetchTracks('recent');
   }
 });

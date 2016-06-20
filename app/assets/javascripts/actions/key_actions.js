@@ -1,6 +1,7 @@
-var handleKeyInput = function(e, actionType){
-  e.preventDefault();
-  var keyName = String.fromCharCode(e.keyCode).toLowerCase();
+var handleKeyInput = function(event, actionType){
+  event.preventDefault();
+  var keyName = String.fromCharCode(event.keyCode).toLowerCase();
+
   if (KeyboardNotes[keyName]) {
     AppDispatcher.dispatch({
       actionType: actionType,
@@ -18,11 +19,11 @@ window.KeyActions = {
     });
   },
 
-  pressKey: function(e) {
-    handleKeyInput(e, KeyConstants.KEY_PRESSED);
+  pressKey: function(event) {
+    handleKeyInput(event, KeyConstants.KEY_PRESSED);
   },
 
-  releaseKey: function(e) {
-    handleKeyInput(e, KeyConstants.KEY_RELEASED);
+  releaseKey: function(event) {
+    handleKeyInput(event, KeyConstants.KEY_RELEASED);
   }
 }

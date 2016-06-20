@@ -29,13 +29,11 @@
     dispatcherID: AppDispatcher.register(function (payload) {
       if (payload.actionType === KeyConstants.KEY_PRESSED) {
         addKey(payload.key);
-        KeyStore.emit(CHANGE_EVENT);
       } else if (payload.actionType === KeyConstants.KEY_RELEASED) {
         deleteKey(payload.key);
-        KeyStore.emit(CHANGE_EVENT);
       }
 
-      return true;
+      KeyStore.emit(CHANGE_EVENT);
     })
   });
 
