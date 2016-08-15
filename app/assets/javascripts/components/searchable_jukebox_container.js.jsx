@@ -33,6 +33,7 @@ var SearchableJukeboxContainer = React.createClass({
 				onBlur={ this.onBlur } onFocus={ this.onFocus }>
 				<input type="text" placeholder="Search Tracks" id="track-search-input"
 					value={ this.state.searchQuery } onChange={ this.handleTextInput } />
+        <i className="fa fa-search track-search-icon" />
 				{ jukebox }
 			</div>
 		)

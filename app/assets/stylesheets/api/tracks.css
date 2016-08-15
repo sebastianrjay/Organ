@@ -8,11 +8,16 @@
 
 #track-search-input {
 	border: solid black 1px;
-	border-radius: 1px;
+	border-radius: 3px;
 	font-size: 16px;
 	line-height: 30px;
-	margin: 20px 0px 0px 40px;
+	margin: 20px -20px 0px 40px;
 	padding: 0px 10px;
+	z-index: 1;
+}
+
+#track-search-icon {
+	z-index: 2;
 }
 
 .jukebox-search-container {
