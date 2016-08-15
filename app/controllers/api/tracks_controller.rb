@@ -33,7 +33,7 @@ class Api::TracksController < ApplicationController
   end
 
   def search
-    @tracks = Track.search(params[:query])
+    @tracks = Track.search_by_name_and_composer(params[:query])
     @tracks.each { |track| track.authorize_deletion!(current_user) }
 
     render json: @tracks

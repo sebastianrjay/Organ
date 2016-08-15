@@ -25,20 +25,28 @@ class Track < ActiveRecord::Base
     @deletable || false
   end
 
-  def self.recent
-    # Randomly sample at most 3 of the 10 most recently created tracks
-    sample_len = [count, 3].min
+  def self.recent(limit = 3)
+    # Randomly sample 3 (or limit) of the most recently created tracks
+    sample_len = [count, limit].min
 
-    includes(:composer).order(created_at: :desc).limit(10).sample(sample_len)
+    includes(:composer).order(created_at: :desc).sample(sample_len)
   end
 
-  def self.search(query)
-    (
-      Track.includes(:composer).substring_search(:name, query) +
-      (User.includes(:tracks)
-              .substring_search(:username, query)
-              .map(&:tracks)
-              .inject(&:+) || [])
-    ).uniq { |track| track.name }.take(3)
+  def self.search_by_composer(query, limit = 3)
+    User.limit(limit)
+        .includes(:tracks)
+        .substring_search(:username, query)
+        .map(&:tracks)        # Array of arrays...
+        .reduce(&:+) || []    # ...reduced into a single array
+  end
+
+  def self.search_by_name(query, limit = 3)
+    Track.limit(limit).includes(:composer).substring_search(:name, query)
+  end
+
+  def self.search_by_name_and_composer(query, limit = 3)
+    (Track.search_by_name(query, limit) + Track.search_by_composer(query, limit))
+        .uniq { |track| track.name }
+        .take(limit)
   end
 end
