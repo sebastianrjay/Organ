@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  extend SearchHelper
 
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true

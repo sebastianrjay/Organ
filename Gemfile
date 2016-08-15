@@ -6,9 +6,6 @@ gem 'rails', '4.2.1'
 gem 'bcrypt'
 # Use PostgreSQL as the database for Active Record
 gem 'pg'
-# Use thinking-sphinx for searches (PostgreSQL is still used for DB)
-gem 'mysql2',          '~> 0.3.18', platform: :ruby
-gem 'thinking-sphinx', '~> 3.2.0'
 
 # Use React/Flux
 gem 'react-rails', '~> 1.0'
@@ -31,6 +28,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
+  # Find N + 1 queries with bullet
+  gem "bullet"
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 

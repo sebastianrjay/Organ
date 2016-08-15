@@ -6,8 +6,8 @@ class Api::TracksController < ApplicationController
     @track.user_id = current_user.id
 
     if @track.save
-      @track.deletable = true if current_user == @track.composer
-      render json: @track
+      @track.authorize_deletion!(current_user)
+      render json: @track.as_json.merge({ composer: { username: current_user.username } })
     else
       render json: @track.errors.full_messages, status: :unprocessable_entity
     end
@@ -26,21 +26,15 @@ class Api::TracksController < ApplicationController
   end
 
   def recent
-    # Randomly sample at most 3 of the 10 most recently created tracks
-    sample_len = [Track.count, 3].min
-    @tracks = Track.includes(:composer).order(created_at: :desc)
-                    .limit(10).sample(sample_len)
-
-    @tracks.each do |track|
-      track.deletable = true if current_user == track.composer
-    end
+    @tracks = Track.recent
+    @tracks.each { |track| track.authorize_deletion!(current_user) }
 
     render json: @tracks
   end
 
   def search
-    query = ThinkingSphinx::Query.wildcard(ThinkingSphinx::Query.escape(params[:query]))
-    @tracks = Track.search query
+    @tracks = Track.search(params[:query])
+    @tracks.each { |track| track.authorize_deletion!(current_user) }
 
     render json: @tracks
   end
@@ -48,6 +42,6 @@ class Api::TracksController < ApplicationController
   private
 
     def track_params
-      params.require(:track).permit(:name, :query, :roll)
+      params.require(:track).permit(:name, :roll)
     end
 end
