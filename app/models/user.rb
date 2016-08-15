@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   before_validation :ensure_session_token!
 
-  has_many :tracks
+  has_many :tracks, inverse_of: :composer, foreign_key: :composer_id
 
   has_secure_password
 

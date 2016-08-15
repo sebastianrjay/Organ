@@ -3,20 +3,20 @@ class Api::TracksController < ApplicationController
 
   def create
     @track = Track.new(track_params)
-    @track.user_id = current_user.id
+    @track.composer_id = current_user.id
 
     if @track.save
       @track.authorize_deletion!(current_user)
-      render json: @track.as_json.merge({ composer: { username: current_user.username } })
+      render json: @track
     else
       render json: @track.errors.full_messages, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @track = Track.includes(:composer).find_by_id(params[:id])
+    @track = Track.find_by_id(params[:id])
 
-    if @track.composer == current_user
+    if @track.composer_id == current_user.id
       @track.destroy
       render json: {}
     else

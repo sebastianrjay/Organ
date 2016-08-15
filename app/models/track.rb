@@ -5,7 +5,7 @@ class Track < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
-  belongs_to :composer, class_name: 'User', foreign_key: :user_id
+  belongs_to :composer, class_name: 'User', foreign_key: :composer_id
 
   def as_json(options = {})
     # Normally it's bad practice to monkey-patch the JSON conversion for all 
@@ -13,12 +13,12 @@ class Track < ActiveRecord::Base
     super({
       include: [{ composer: { only: :username }}],
       methods: [:deletable, :id],
-      except: [:created_at, :updated_at, :user_id]
+      except: [:created_at, :updated_at, :composer_id]
     }.merge(options))
   end
 
   def authorize_deletion!(user)
-    @deletable = true if user.id == self.user_id
+    @deletable = true if user.id == self.composer_id
   end
 
   def deletable
