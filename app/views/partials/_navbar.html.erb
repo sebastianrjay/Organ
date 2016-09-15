@@ -1,22 +1,16 @@
-<section class="row">
-	<nav class="col-md-12" role="toolbar">
-		<div class="col-md-4">
-			<div class="left-container">
-				<span id="logo-helper"></span>
-				<img src="<%= image_path 'organ_logo.png' %>" id="logo"></img>
-			</div>
+<nav class="row">
+	<div class="col-md-12">
+		<div class="left-container">
+			<span id="logo-helper"></span>
+			<img src="<%= image_path 'organ_logo.png' %>" id="logo"></img>
 		</div>
-		<div class="col-md-4">
-			<p id="user-greeting">Welcome back, <%= current_user.username %>!</p>
+		<p id="user-greeting">Welcome back, <%= current_user.username %>!</p>
+		<div class="right-container">
+			<form class="sign-out" action="<%= session_url %>" method="POST">
+		    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		    <input type="hidden" name="_method" value="DELETE">
+		    <input class="btn btn-default sign-out-btn" type="submit" value="Log Out">
+		  </form>
 		</div>
-		<div class="col-md-4">
-			<div class="right-container">
-				<form class="sign-out" action="<%= session_url %>" method="POST">
-			    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-			    <input type="hidden" name="_method" value="DELETE">
-			    <input class="btn btn-default sign-out-btn" type="submit" value="Log Out">
-			  </form>
-			</div>
-		</div>	
-	</nav>
-</section>
+	</div>	
+</nav>

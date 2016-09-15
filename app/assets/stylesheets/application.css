@@ -39,6 +39,7 @@ $piano-background-color: #FFFFFF;
 }
 
 #user-greeting {
+  margin-left: 200px;
   text-align: center;
 }
 
