@@ -1,6 +1,11 @@
 var SearchableJukeboxContainer = React.createClass({
 	getInitialState: function() {
-		return { searchQuery: '', organKeyListenersRemoved: false };
+		return {
+      organKeyListenersRemoved: false,
+      previousBlurOrFocusEvent: 'blur',
+      searchQuery: '',
+      searchQueryBeforeBlurOrFocus: ''
+    };
 	},
 
 	handleTextInput: function(e) {
@@ -10,11 +15,19 @@ var SearchableJukeboxContainer = React.createClass({
   },
 
   onBlur: function() {
-  	this.toggleOrganKeyListeners();
+    if(this.state.previousBlurOrFocusEvent === 'blur' && 
+        this.state.searchQueryBeforeBlurOrFocus === this.state.searchQuery) {
+      return;
+    }
+  	this.toggleOrganKeyListeners('blur');
   },
 
   onFocus: function() {
-  	this.toggleOrganKeyListeners();
+    if(this.state.previousBlurOrFocusEvent === 'focus' && 
+        this.state.searchQueryBeforeBlurOrFocus === this.state.searchQuery) {
+      return;
+    }
+  	this.toggleOrganKeyListeners('focus');
   },
 
 	render: function() {
@@ -24,22 +37,22 @@ var SearchableJukeboxContainer = React.createClass({
       ApiActions.fetchTracks('search', this.state.searchQuery);
 			jukebox = <Jukebox role="search" />
 		} else {
-      ApiActions.fetchTracks('recent')
+      ApiActions.fetchTracks('recent');
 			jukebox = <Jukebox role="recent" />
 		}
 
 		return (
-			<div className="jukebox-search-container"
-				onBlur={ this.onBlur } onFocus={ this.onFocus }>
+			<div className="jukebox-search-container">
 				<input type="text" placeholder="Search Tracks" id="track-search-input"
-					value={ this.state.searchQuery } onChange={ this.handleTextInput } />
+          onBlur={ this.onBlur } onFocus={ this.onFocus }
+					value={ this.state.searchQuery } onInput={ this.handleTextInput } />
         <i className="fa fa-search track-search-icon" />
 				{ jukebox }
 			</div>
 		)
 	},
 
-	toggleOrganKeyListeners: function() {
+	toggleOrganKeyListeners: function(eventName) {
 		if(this.state.organKeyListenersRemoved) {
 			document.addEventListener('keydown', KeyActions.pressKey);
     	document.addEventListener('keyup', KeyActions.releaseKey);
@@ -49,7 +62,9 @@ var SearchableJukeboxContainer = React.createClass({
 		}
 
 		this.setState({
-			organKeyListenersRemoved: !this.state.organKeyListenersRemoved
+			organKeyListenersRemoved: !this.state.organKeyListenersRemoved,
+      previousBlurOrFocusEvent: eventName,
+      searchQueryBeforeBlurOrFocus: this.state.searchQuery
 		});
 	}
 });
