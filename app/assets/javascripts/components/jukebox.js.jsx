@@ -56,7 +56,7 @@ var Jukebox = React.createClass({
     }
 
     return (
-      <div className={ 'col-md-12 jukebox-container-' + this.props.role }>
+      <div className={ 'col-md-12 jukebox-container ' + this.props.role }>
         <h3>{ this.headerText() }</h3>
         <br />
         { content }
