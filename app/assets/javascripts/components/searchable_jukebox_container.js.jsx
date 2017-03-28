@@ -15,18 +15,10 @@ var SearchableJukeboxContainer = React.createClass({
   },
 
   onBlur: function() {
-    if(this.state.previousBlurOrFocusEvent === 'blur' && 
-        this.state.searchQueryBeforeBlurOrFocus === this.state.searchQuery) {
-      return;
-    }
   	this.toggleOrganKeyListeners('blur');
   },
 
   onFocus: function() {
-    if(this.state.previousBlurOrFocusEvent === 'focus' && 
-        this.state.searchQueryBeforeBlurOrFocus === this.state.searchQuery) {
-      return;
-    }
   	this.toggleOrganKeyListeners('focus');
   },
 
@@ -37,7 +29,9 @@ var SearchableJukeboxContainer = React.createClass({
       ApiActions.fetchTracks('search', this.state.searchQuery);
 			jukebox = <Jukebox role="search" />
 		} else {
-      ApiActions.fetchTracks('recent');
+      if(this.state.searchQuery !== this.state.searchQueryBeforeBlurOrFocus) {
+        ApiActions.fetchTracks('recent');
+      }
 			jukebox = <Jukebox role="recent" />
 		}
 
