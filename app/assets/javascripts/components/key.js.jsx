@@ -28,10 +28,15 @@ var Key = React.createClass({
   },
 
   render: function() {
+    var _specialKeyNames = { 'º': ";", 'þ': "'" };
+    var keyName = _specialKeyNames[this.props.keyName] || this.props.keyName;
+
     return (
       <div onMouseDown={ this.handleMousePress } onMouseUp={ this.handleMouseUp }
       className={ 'key ' + this.props.color + ' ' + this.state.keyState }
-      style={ this.props.style } />
+      style={ this.props.style }>
+        <p className={ 'key-name ' + this.props.color }>{ keyName }</p>
+      </div>
     );
   }
 });

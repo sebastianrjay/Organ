@@ -54,3 +54,16 @@
 .key.pressed {
   background-color: gray;
 }
+
+.key-name {
+  text-align: center;
+}
+
+.key-name.black {
+  color: white; // Show white key name on black keys
+  padding-top: 80px;
+}
+
+.key-name.white {
+  padding-top: 170px;
+}
