@@ -1,6 +1,6 @@
 # About
 
-Organ allows you to play an organ on your computer keyboard or via your mouse, and to record, save, play and search for tracks that you create on the organ. Feel free to play around with the [LIVE APP](https://sheltered-brushlands-6161.herokuapp.com/) (custom domain name coming soon).
+Organ allows you to play an organ on your computer keyboard or via your mouse, and to record, save, play and search for tracks that you create on the organ. Feel free to play around with the [LIVE APP](https://keyb0ard.herokuapp.com/).
 
 # Description
 
