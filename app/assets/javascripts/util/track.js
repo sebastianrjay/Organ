@@ -7,8 +7,8 @@
   window.Track = function(options) {
     this.id = (options || {}).id || null;
     this.deletable = (options || {}).deletable;
-    this.name = (options || {}).name || "Unknown Title";
-    this.composer = (options || {}).composer || "Unknown Composer";
+    this.name = (options || {}).name || 'Unknown Title';
+    this.composer = (options || {}).composer || 'Unknown Composer';
     this.frequenciesAndTimes = (options || {}).frequenciesAndTimes || [];
     this.recording = false, this.recordStartTime = null;
     this.playing = false, this.paused = false, this.notesIdx = null;
@@ -22,7 +22,7 @@
           return KeyboardNotes[pressedKey];
         });
         this.recordStartTime = this.recordStartTime || Date.now();
-        var time = Date.now() - this.recordStartTime;
+        var time = Date.now() - this.recordStartTime - this.deadSpaceDuration;
         this.frequenciesAndTimes.push({ time: time, frequencies: frequencies });
       }
     },
@@ -82,6 +82,9 @@
 
     record: function() {
       this.recording = true;
+      this.deadSpaceDuration = this.deadSpaceDuration || 0;
+      this.deadSpaceDuration +=
+        this.lastRecordStopTime ? Date.now() - this.lastRecordStopTime : 0;
     },
 
     stopPlayback: function() {
@@ -99,6 +102,7 @@
 
     stopRecording: function() {
       this.recording = false;
+      this.lastRecordStopTime = Date.now();
     }
   }
 })();

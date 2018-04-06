@@ -5,7 +5,7 @@ gem 'rails', '4.2.8'
 # Use ActiveModel has_secure_password
 gem 'bcrypt'
 # Use PostgreSQL as the database for Active Record
-gem 'pg'
+gem 'pg', '~> 0.20.0'
 
 # Use React/Flux
 gem 'react-rails', '~> 1.0'
@@ -14,6 +14,7 @@ gem 'flux-rails-assets'
 gem "twitter-bootstrap-rails"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'coffee-rails', '~> 4.1.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -42,4 +43,4 @@ group :development, :test do
 end
 
 gem 'rails_12factor', group: :production
-ruby "2.3.0"
+ruby '2.5.0'

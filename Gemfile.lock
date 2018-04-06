@@ -48,6 +48,13 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11.0)
     byebug (9.1.0)
+    coffee-rails (4.1.1)
+      coffee-script (>= 2.2.0)
+      railties (>= 4.0.0, < 5.1.x)
+    coffee-script (2.4.1)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.12.2)
     commonjs (0.2.7)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
@@ -90,7 +97,7 @@ GEM
     multi_json (1.13.1)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
-    pg (1.0.0)
+    pg (0.20.0)
     rack (1.6.8)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -186,10 +193,11 @@ DEPENDENCIES
   bcrypt
   bullet
   byebug
+  coffee-rails (~> 4.1.0)
   flux-rails-assets
   jbuilder (~> 2.0)
   jquery-rails
-  pg
+  pg (~> 0.20.0)
   rails (= 4.2.8)
   rails_12factor
   react-rails (~> 1.0)
@@ -202,7 +210,7 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 RUBY VERSION
-   ruby 2.3.0p0
+   ruby 2.5.0p0
 
 BUNDLED WITH
-   1.14.6
+   1.16.1

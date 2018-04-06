@@ -6,10 +6,10 @@ $(function() {
     var recorder = React.createElement(Recorder, {});
     var userTracks = React.createElement(Jukebox, { role: 'user' });
 
-    React.render(organ, document.getElementById('organ'));
-    React.render(recentOrSearchedTracks, 
+    ReactDOM.render(organ, document.getElementById('organ'));
+    ReactDOM.render(recentOrSearchedTracks, 
         document.getElementById('recent-or-searched-tracks'));
-    React.render(recorder, document.getElementById('recorder'));
-    React.render(userTracks, document.getElementById('user-tracks'));
+    ReactDOM.render(recorder, document.getElementById('recorder'));
+    ReactDOM.render(userTracks, document.getElementById('user-tracks'));
   }
 });
