@@ -41,7 +41,7 @@ var Jukebox = React.createClass({
 
   render: function() {
     var content, i = 0;
-    if(this.props.role == 'user' && this.state.tracks.length === 0) {
+    if (this.props.role == 'user' && this.state.tracks.length === 0) {
       content = this.userInstructions();
     } else if (this.state.tracks.length === 0) {
       content = <h4>{ "Loading..." }</h4>

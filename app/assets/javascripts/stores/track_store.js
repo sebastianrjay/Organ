@@ -37,7 +37,7 @@
       return newData.name === track.name;
     });
 
-    if(newData.composer) { newData.composer = newData.composer.username; }
+    if (newData.composer) { newData.composer = newData.composer.username; }
     // Don't redundantly include newData.roll, which is identical to
     // track.frequenciesAndTimes and never changes
     delete newData.roll;
@@ -90,7 +90,5 @@
 
 
 $(function(){
-  if(User.loggedIn) {
-    ApiActions.fetchTracks('recent');
-  }
+  if (User.loggedIn) ApiActions.fetchTracks('recent');
 });

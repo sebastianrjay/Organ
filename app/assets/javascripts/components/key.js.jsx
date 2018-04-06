@@ -18,7 +18,7 @@ var Key = React.createClass({
   },
 
   _onChange: function() {
-    if(KeyStore.pressedKeys()[this.props.keyName]) {
+    if (KeyStore.pressedKeys()[this.props.keyName]) {
       this.note.start();
       this.setState({ keyState: 'pressed' });
     } else {

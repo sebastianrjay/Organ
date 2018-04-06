@@ -17,7 +17,7 @@
   Track.prototype = {
 
     addNotes: function(pressedKeyHash) {
-      if(this.recording) {
+      if (this.recording) {
         var frequencies = Object.keys(pressedKeyHash).map(function(pressedKey) {
           return KeyboardNotes[pressedKey];
         });
@@ -30,7 +30,7 @@
     play: function() {
       this.playing = true, this.playStartTime = Date.now();
       this.notesIdx = this.notesIdx || 0;
-      if(!this.paused) {
+      if (!this.paused) {
         this.notesAndTimes = this.frequenciesAndTimes.slice(0).map(function(hash) {
           hash.notes = hash.frequencies.map(function(freq) {
             return new Note(freq);
@@ -44,18 +44,18 @@
     },
 
     playOrStopNotes: function() {
-      if(this.notesAndTimes[this.notesIdx] && (Date.now() - this.playStartTime) >=
+      if (this.notesAndTimes[this.notesIdx] && (Date.now() - this.playStartTime) >=
           this.notesAndTimes[this.notesIdx].time) {
-        if(this.notesIdx > 0) {
+        if (this.notesIdx > 0) {
           this.notesAndTimes[this.notesIdx - 1].notes.forEach(function(note) {
-            if(!this.notesAndTimes[this.notesIdx].notes.indexOf(note) !== -1) {
+            if (!this.notesAndTimes[this.notesIdx].notes.indexOf(note) !== -1) {
               note.stop();
             }
           }.bind(this));
         }
 
         this.notesAndTimes[this.notesIdx].notes.forEach(function(note) {
-          if(this.notesIdx === 0 ||
+          if (this.notesIdx === 0 ||
               !this.notesAndTimes[this.notesIdx - 1].notes.indexOf(note) !== -1) {
             note.start();
           }
@@ -64,7 +64,7 @@
         this.notesIdx++;
       }
 
-      if(this.notesIdx === this.notesAndTimes.length) {
+      if (this.notesIdx === this.notesAndTimes.length) {
         this.stopPlayback();
       }
     },

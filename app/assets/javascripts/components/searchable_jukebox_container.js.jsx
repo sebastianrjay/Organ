@@ -25,11 +25,11 @@ var SearchableJukeboxContainer = React.createClass({
 	render: function() {
 		var jukebox;
 
-		if(this.state.searchQuery) {
+		if (this.state.searchQuery) {
       ApiActions.fetchTracks('search', this.state.searchQuery);
 			jukebox = <Jukebox role="search" />
 		} else {
-      if(this.state.searchQuery !== this.state.searchQueryBeforeBlurOrFocus) {
+      if (this.state.searchQuery !== this.state.searchQueryBeforeBlurOrFocus) {
         ApiActions.fetchTracks('recent');
       }
 			jukebox = <Jukebox role="recent" />
@@ -47,7 +47,7 @@ var SearchableJukeboxContainer = React.createClass({
 	},
 
 	toggleOrganKeyListeners: function(eventName) {
-		if(this.state.organKeyListenersRemoved) {
+		if (this.state.organKeyListenersRemoved) {
 			document.addEventListener('keydown', KeyActions.pressKey);
     	document.addEventListener('keyup', KeyActions.releaseKey);
 		} else {

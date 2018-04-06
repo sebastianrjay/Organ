@@ -1,9 +1,5 @@
 var Recorder = React.createClass({
 
-  cancelSaveTrack: function() {
-    this.setState({ recording: false, doneRecording: false });
-  },
-
   componentDidMount: function() {
     this.track = null;
     KeyStore.addChangeListener(this._onKeyStoreChange);
@@ -11,22 +7,19 @@ var Recorder = React.createClass({
   },
 
   deleteTrack: function() {
-    if (this.track.playing) {
-      this.track.stopPlayback();
-    }
-    this.track = null;
-    this.setState({ recording: false, doneRecording: false, formInput: "" });
+    if (this.track.playing) this.track.stopPlayback();
+    this.resetTrackState();
   },
 
   getInitialState: function() {
     return { recording: false, playing: false, doneRecording: false,
-      formInput: "" };
+      trackName: '' };
   },
 
   handleTextInput: function(e) {
     e.stopPropagation();
     e.preventDefault();
-    this.setState({ formInput: e.target.value });
+    this.setState({ trackName: e.target.value });
   },
 
   _onKeyStoreChange: function() {
@@ -42,54 +35,57 @@ var Recorder = React.createClass({
   },
 
   render: function() {
-    var recordClass = "", playClass = "", playText = "Stop", input, saveButton,
-        deleteButton = "", playButton = "", cancelButton,
-        recordText = "Stop Recording";
-
-    this.state.recording ? recordClass = " recording" : recordText = "Record";
-    this.state.playing ? playClass = " playing" : playText = "Play";
-
-    if (this.track) {
-      deleteButton = <button className='delete-button'
-        onClick={ this.deleteTrack }>Delete</button>
-      playButton = <button className={ 'play-button' + playClass }
-      onClick={ this.togglePlay }>{ playText }</button>
-    }
-
-    if(this.state.doneRecording) {
-      document.removeEventListener('keydown', KeyActions.pressKey);
-      document.removeEventListener('keyup', KeyActions.releaseKey);
-      input = <input type="text" className='new-track-input' placeholder="Song Title"
-        value={ this.state.formInput } onChange={ this.handleTextInput } />
-      saveButton = <button className='save-button'
-        onClick={ this.saveTrack }>Save</button>;
-      cancelButton = <button className='cancel-button'
-        onClick={ this.cancelSaveTrack }>Cancel</button>
-    } else {
-      document.addEventListener('keydown', KeyActions.pressKey);
-      document.addEventListener('keyup', KeyActions.releaseKey);
-      input = "", saveButton = "", cancelButton = "";
-    }
+    this.toggleKeyboardEventListeners();
+    var deletable = this.state.doneRecording || this.state.recording,
+        doneRecording = this.state.doneRecording,
+        recording = this.state.recording;
 
     return (
       <div className='recorder'>
-        <button className={ 'record-button' + recordClass }
-        onClick={ this.toggleRecord }>{ recordText }</button>
-        { playButton }
-        { input }
-        { saveButton }
-        { cancelButton }
-        { deleteButton }
+        <RecordButton onClick={this.toggleRecord} recording={recording}/>
+        <Button type='play' onClick={this.togglePlay} showButton={doneRecording}/>
+        {
+          doneRecording ?
+            <input
+              type='text'
+              placeholder='Song Title'
+              value={this.state.trackName}
+              onChange={this.handleTextInput}
+            />
+          : null
+        }
+        <Button type='save' onClick={this.saveTrack} showButton={doneRecording}/>
+        <Button type='delete' onClick={this.resetTrackState} showButton={deletable}/>
       </div>
     )
   },
 
+  resetTrackState: function() {
+    this.track = null;
+    this.setState({
+      playing: false,
+      recording: false,
+      doneRecording: false,
+      trackName: ''
+    });
+  },
+
   saveTrack: function() {
-    this.track.name = this.state.formInput;
+    this.track.name = this.state.trackName;
     TrackActions.addUserTrack(this.track);
     ApiActions.saveTrack(this.track);
     this.track = null;
-    this.setState({ doneRecording: false, formInput: "" });
+    this.setState({ doneRecording: false, trackName: '' });
+  },
+
+  toggleKeyboardEventListeners: function() {
+    if (this.state.doneRecording) {
+      document.removeEventListener('keydown', KeyActions.pressKey);
+      document.removeEventListener('keyup', KeyActions.releaseKey);
+    } else {
+      document.addEventListener('keydown', KeyActions.pressKey);
+      document.addEventListener('keyup', KeyActions.releaseKey);
+    }
   },
 
   togglePlay: function() {

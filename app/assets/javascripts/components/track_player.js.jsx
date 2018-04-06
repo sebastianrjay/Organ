@@ -6,20 +6,11 @@ var TrackPlayer = React.createClass({
   },
 
   render: function() {
-    var playClass = " fa fa-play", deleteButton = "", stopButton = "";
-    if(this.props.track.playing) {
-      playClass = " fa fa-pause";
-      stopButton = <button><span className='stop-button fa fa-stop'
-          onClick={ this.props.track.stopPlayback.bind(this.props.track) }>
-          </span></button>
-    }
-
-    if(this.props.track.paused) playClass = " fa fa-play";
-
-    if(this.props.track.deletable) {
-      deleteButton =
-        <button><span onClick={ this.deleteTrack }>Delete</span></button>
-    }
+    var isDeletable = this.props.track.deletable,
+        onStop = this.props.track.stopPlayback.bind(this.props.track),
+        isPaused = this.props.track.paused,
+        isPlaying = this.props.track.playing,
+        playbackButtonType = isPlaying && !isPaused ? 'pause' : 'play';
 
     return (
       <div className='track-player-container'>
@@ -27,10 +18,9 @@ var TrackPlayer = React.createClass({
           <h5>"{ this.props.track.name }"</h5>
           <h6>{ this.props.track.composer }</h6>
           <div className='track-player-controls'>
-            <button><span className={ 'play-button' + playClass }
-            onClick={ this.togglePlay }></span></button>
-            { stopButton }
-            { deleteButton }
+            <Button type={playbackButtonType} onClick={this.togglePlay}/>
+            <Button type='stop' onClick={onStop} showButton={isPlaying}/>
+            <Button type='delete' onClick={this.deleteTrack} showButton={isDeletable}/>
           </div>
         </div>
       </div>
